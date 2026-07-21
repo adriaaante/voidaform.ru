@@ -261,6 +261,7 @@ h1, h2, h3, .display {
 
 .hero__in {
   width: 100%;
+  padding-top: 96px; /* не даёт контенту налезать на шапку на низких экранах */
   padding-bottom: clamp(56px, 9vh, 110px);
 }
 
@@ -822,6 +823,13 @@ h1, h2, h3, .display {
 @media (max-width: 1024px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+}
+
+/* нечётная последняя карточка не остаётся «сиротой» в полупустом ряду */
+@media (max-width: 1024px) and (min-width: 561px) {
+  .projects-grid .project-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .projects-grid .project-card:last-child:nth-child(odd) .project-card__media { aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 860px) {
@@ -848,6 +856,8 @@ h1, h2, h3, .display {
   }
 
   .header.is-menu-open { background: var(--bg); }
+
+  .header.is-menu-open .logo { position: relative; z-index: 56; }
 
   .burger { display: flex; position: relative; z-index: 56; }
 
