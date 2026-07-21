@@ -17,13 +17,13 @@
   <meta property="og:image" content="https://voidaform.ru/assets/img/hero.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="preload" as="image" href="/assets/img/hero.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" as="image" href="assets/img/hero.jpg">
 
   <script type="application/ld+json">
   {
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "Сколько стоит дизайн-проект интерьера?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Стоимость зависит от площади и состава проекта. Полный дизайн-проект — от 3 500 ₽/м²: планировочные решения, визуализации, рабочие чертежи и спецификации. Точную смету считаем после короткого брифа — это бесплатно." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Стоимость рассчитывается индивидуально — она зависит от площади, состава проекта и объёма работ. Уточните по телефону +7 (987) 654-32-10: короткая консультация и предварительная смета — бесплатно." }
       },
       {
         "@type": "Question",
@@ -94,13 +94,13 @@
 
   <header class="header" id="header">
     <div class="container header__in">
-      <a class="logo" href="/">Void <span>&amp;</span> Form</a>
+      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
       <nav class="nav" id="nav" aria-label="Основная навигация">
-        <a href="/#projects">Проекты</a>
-        <a href="/#about">Философия</a>
-        <a href="/#services">Услуги</a>
-        <a href="/#process">Процесс</a>
-        <a href="/#contacts">Контакты</a>
+        <a href="#projects">Проекты</a>
+        <a href="#about">Философия</a>
+        <a href="#services">Услуги</a>
+        <a href="#process">Процесс</a>
+        <a href="#contacts">Контакты</a>
       </nav>
       <a class="header__phone" href="tel:+79876543210">+7 (987) 654-32-10</a>
       <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
@@ -113,7 +113,7 @@
 
     <section class="hero">
       <div class="hero__bg">
-        <img src="/assets/img/hero.jpg" alt="Минималистичный интерьер гостиной в пастельных тонах — проект дизайн-бюро Void & Form" fetchpriority="high">
+        <img src="assets/img/hero.jpg" alt="Минималистичный интерьер гостиной в пастельных тонах — проект дизайн-бюро Void & Form" fetchpriority="high">
       </div>
       <div class="container hero__in">
         <h1 class="hero__title">Пустота становится <em>формой</em></h1>
@@ -145,71 +145,38 @@
           <p class="lead">Каждый проект — отражение ритма, характера и внутреннего мира человека.</p>
         </div>
         <div class="projects-grid">
-          <a class="project-card reveal" href="/projects/tishina.html">
+          <a class="project-card reveal" href="projects/grafit.html">
             <div class="project-card__media">
-              <span class="project-card__tag">Апартаменты</span>
-              <img src="/assets/img/tishina-1.jpg" alt="Дизайн интерьера светлой минималистичной гостиной — проект «Тишина», 127 м²" loading="lazy">
+              <span class="project-card__tag">ЖК RedSide</span>
+              <img src="assets/img/grafit-cover.jpg" alt="Кухня с латунными деталями и барными стульями в оливковом бархате — дизайн-проект квартиры 47,6 м², ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
-              <span class="project-card__name">Тишина</span>
-              <span class="project-card__area">127 м²</span>
+              <span class="project-card__name">Графит</span>
+              <span class="project-card__area">47,6 м²</span>
             </div>
-            <p class="project-card__desc">Светлый минимализм: известняк, кремовые оттенки, мягкий свет</p>
+            <p class="project-card__desc">Графит, олива и латунь: собранный интерьер в центре Москвы</p>
           </a>
-          <a class="project-card reveal" href="/projects/forma.html">
+          <a class="project-card reveal" href="projects/akvarel.html">
             <div class="project-card__media">
-              <span class="project-card__tag">Квартира</span>
-              <img src="/assets/img/forma-1.jpg" alt="Дизайн кухни-гостиной в стиле джапанди — проект «Форма», 84 м²" loading="lazy">
+              <span class="project-card__tag">ЖК RedSide</span>
+              <img src="assets/img/akvarel-cover.jpg" alt="Прихожая с круглым зеркалом и зелёной акцентной стеной — дизайн-проект четырёхкомнатной квартиры, ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
-              <span class="project-card__name">Форма</span>
-              <span class="project-card__area">84 м²</span>
+              <span class="project-card__name">Акварель</span>
+              <span class="project-card__area">4 комнаты</span>
             </div>
-            <p class="project-card__desc">Джапанди: светлый дуб, глиняная штукатурка, камень</p>
+            <p class="project-card__desc">Светлая семейная квартира: зелень, пудра и графичные перегородки</p>
           </a>
-          <a class="project-card reveal" href="/projects/svet.html">
+          <a class="project-card reveal" href="projects/glubina.html">
             <div class="project-card__media">
-              <span class="project-card__tag">Пентхаус</span>
-              <img src="/assets/img/svet-1.jpg" alt="Интерьер пентхауса с панорамными окнами — проект «Свет», 156 м²" loading="lazy">
+              <span class="project-card__tag">ЖК RedSide</span>
+              <img src="assets/img/glubina-cover.jpg" alt="Коридор с книжными стеллажами и линейной подсветкой — дизайн-проект квартиры 159,6 м², ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
-              <span class="project-card__name">Свет</span>
-              <span class="project-card__area">156 м²</span>
+              <span class="project-card__name">Глубина</span>
+              <span class="project-card__area">159,6 м²</span>
             </div>
-            <p class="project-card__desc">Панорамный минимализм: травертин, город в дымке</p>
-          </a>
-          <a class="project-card reveal" href="/projects/dyhanie.html">
-            <div class="project-card__media">
-              <span class="project-card__tag">Квартира</span>
-              <img src="/assets/img/dyhanie-1.jpg" alt="Спальня в пастельных тонах с текстурной штукатуркой — проект «Дыхание», 68 м²" loading="lazy">
-            </div>
-            <div class="project-card__body">
-              <span class="project-card__name">Дыхание</span>
-              <span class="project-card__area">68 м²</span>
-            </div>
-            <p class="project-card__desc">Пастель и лён: камерное пространство для двоих</p>
-          </a>
-          <a class="project-card reveal" href="/projects/gran.html">
-            <div class="project-card__media">
-              <span class="project-card__tag">Апартаменты</span>
-              <img src="/assets/img/gran-1.jpg" alt="Столовая с акцентной стеной из тёмного камня — проект «Грань», 92 м²" loading="lazy">
-            </div>
-            <div class="project-card__body">
-              <span class="project-card__name">Грань</span>
-              <span class="project-card__area">92 м²</span>
-            </div>
-            <p class="project-card__desc">Грейдж и тёмный камень: спокойный контраст</p>
-          </a>
-          <a class="project-card reveal" href="/projects/bereg.html">
-            <div class="project-card__media">
-              <span class="project-card__tag">Квартира</span>
-              <img src="/assets/img/bereg-1.jpg" alt="Домашний кабинет с библиотекой в песочных тонах — проект «Берег», 143 м²" loading="lazy">
-            </div>
-            <div class="project-card__body">
-              <span class="project-card__name">Берег</span>
-              <span class="project-card__area">143 м²</span>
-            </div>
-            <p class="project-card__desc">Песок и лён: кабинет-библиотека, тёплая тишина</p>
+            <p class="project-card__desc">Большая квартира в тёмных тонах: синий бархат, дерево, камин</p>
           </a>
         </div>
       </div>
@@ -218,7 +185,7 @@
     <section class="section" id="about">
       <div class="container about">
         <div class="about__media reveal">
-          <img src="/assets/img/about-1.jpg" alt="Свет и тень на известняковой стене — деталь интерьера Void & Form" loading="lazy">
+          <img src="assets/img/about-1.jpg" alt="Свет и тень на известняковой стене — деталь интерьера Void & Form" loading="lazy">
         </div>
         <div class="about__text reveal">
           <span class="section-label">Философия</span>
@@ -257,25 +224,25 @@
             <span class="service__num">01</span>
             <h3>Дизайн-проект</h3>
             <p>Планировочные решения, визуализации, полный комплект рабочих чертежей и спецификаций для строителей.</p>
-            <span class="service__price">от 3 500 ₽/м²</span>
+            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
           </article>
           <article class="service reveal">
             <span class="service__num">02</span>
             <h3>Авторский надзор</h3>
             <p>Контролируем соответствие работ проекту, ведём подрядчиков и принимаем ключевые этапы за вас.</p>
-            <span class="service__price">от 30 000 ₽/мес</span>
+            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
           </article>
           <article class="service reveal">
             <span class="service__num">03</span>
             <h3>Ремонт под ключ</h3>
             <p>Дизайнерский ремонт квартир силами проверенных бригад: смета без сюрпризов, сроки в договоре.</p>
-            <span class="service__price">от 45 000 ₽/м²</span>
+            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
           </article>
           <article class="service reveal">
             <span class="service__num">04</span>
             <h3>Комплектация</h3>
             <p>Подбор и закупка мебели, света и декора по проекту — с дизайнерскими скидками и логистикой.</p>
-            <span class="service__price">10% от бюджета</span>
+            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
           </article>
         </div>
       </div>
@@ -330,7 +297,7 @@
         <div class="faq reveal">
           <details>
             <summary>Сколько стоит дизайн-проект интерьера?</summary>
-            <p class="faq__a">Стоимость зависит от площади и состава проекта. Полный дизайн-проект — от 3 500 ₽/м²: планировочные решения, визуализации, рабочие чертежи и спецификации. Точную смету считаем после короткого брифа — это бесплатно.</p>
+            <p class="faq__a">Стоимость рассчитывается индивидуально — она зависит от площади, состава проекта и объёма работ. Уточните по телефону <a href="tel:+79876543210" style="text-decoration:underline">+7&nbsp;(987)&nbsp;654-32-10</a>: короткая консультация и предварительная смета — бесплатно.</p>
           </details>
           <details>
             <summary>Сколько длится ремонт квартиры под ключ?</summary>
@@ -387,7 +354,7 @@
           </div>
           <label class="form__consent">
             <input type="checkbox" required checked>
-            <span>Отправляя форму, вы соглашаетесь с <a href="/privacy.html">политикой обработки персональных данных</a></span>
+            <span>Отправляя форму, вы соглашаетесь с <a href="privacy.html">политикой обработки персональных данных</a></span>
           </label>
           <button class="btn" type="submit">Отправить заявку</button>
           <p class="form__done">Спасибо! Мы свяжемся с вами в ближайшее время. Быстрее всего — по телефону <a href="tel:+79876543210">+7 (987) 654-32-10</a>.</p>
@@ -399,12 +366,12 @@
 
   <footer class="footer">
     <div class="container footer__in">
-      <a class="logo" href="/">Void <span>&amp;</span> Form</a>
+      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
       <nav class="footer__nav" aria-label="Навигация в подвале">
-        <a href="/#projects">Проекты</a>
-        <a href="/#services">Услуги</a>
-        <a href="/#contacts">Контакты</a>
-        <a href="/privacy.html">Политика конфиденциальности</a>
+        <a href="#projects">Проекты</a>
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+        <a href="privacy.html">Политика конфиденциальности</a>
       </nav>
       <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
     </div>
@@ -414,6 +381,6 @@
     <img src="" alt="">
   </div>
 
-  <script src="/js/main.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

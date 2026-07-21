@@ -16,15 +16,20 @@
 - Шрифты: Google Fonts (Cormorant Garamond + Manrope), подключены с preconnect.
 
 ## Грабли / важное
-- **Все фото проектов — AI-плейсхолдеры** (Higgsfield nano_banana_pro, июль 2026).
-  Заказчик обещал PDF с реальными проектами в Google Drive, папка
-  «Примеры работ» (id 1fqC5GFI4UaOJb3P2bmhFcwvewpYZsHgO) — на 21.07.2026 была ПУСТА.
-  При появлении PDF: извлечь картинки → заменить `assets/img/*` → обновить данные
-  в `scripts/build_projects.py` → перегенерировать страницы.
+- **Проекты (grafit, akvarel, glubina) — реальные работы заказчика** из PDF-альбомов
+  в Google Drive, папка «Примеры работ» (id 1fqC5GFI4UaOJb3P2bmhFcwvewpYZsHgO):
+  1.pdf = 47,6 м² (grafit), 2.pdf = 4-комн. (akvarel), 3.pdf = 159,6 м² (glubina),
+  все — ЖК RedSide, Москва, 2019. Изображения извлечены из PDF (PyMuPDF, встроенные
+  картинки страниц, без рамок чертежей), ужаты до 1600px/q82.
+- `assets/img/hero.jpg` и `about-1.jpg` — AI-плейсхолдеры (Higgsfield), не реальные работы.
+- **Пути на страницах относительные** (не абсолютные!) — сайт должен работать и на
+  GitHub Pages в подпапке /voidaform.ru/, и на корне домена.
+- Цены на сайте не указываются (как у конкурента bureauslovo.com) — «уточняется по телефону».
 - SEO уже разложено: JSON-LD (ProfessionalService, FAQPage, BreadcrumbList), OG-теги,
   canonical на https://voidaform.ru. При смене домена — менять и в
   `scripts/build_projects.py` (константа SITE), и в index/sitemap/robots.
 - Форма заявки серверной части не имеет: submit открывает WhatsApp с текстом заявки.
+- Цифры в блоке «Философия» (9 лет / 64 проекта / 8 400 м²) — заглушки, не подтверждены.
 
 ## Команды
 - `python3 scripts/build_projects.py` — перегенерировать страницы проектов.
