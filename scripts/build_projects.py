@@ -245,7 +245,7 @@ TEMPLATE = """<!DOCTYPE html>
   </footer>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-label="Просмотр фотографии">
-    <img src="" alt="">
+    <img alt="">
   </div>
 
   <script src="../js/main.js" defer></script>

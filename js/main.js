@@ -22,7 +22,14 @@
       if (e.target.tagName === "A") {
         header.classList.remove("is-menu-open");
         burger.classList.remove("is-open");
+        burger.setAttribute("aria-expanded", "false");
         document.body.style.overflow = "";
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && header.classList.contains("is-menu-open")) {
+        burger.click();
       }
     });
   }
@@ -55,7 +62,7 @@
     });
     lightbox.addEventListener("click", function () {
       lightbox.classList.remove("is-open");
-      lightboxImg.src = "";
+      lightboxImg.removeAttribute("src");
       document.body.style.overflow = "";
     });
     document.addEventListener("keydown", function (e) {
