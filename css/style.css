@@ -477,16 +477,46 @@ h1, h2, h3 {
   flex-grow: 1;
 }
 
-.service__price {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+.service__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 
-.service__price a { text-decoration: underline; text-underline-offset: 3px; }
+.service__meta dt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.service__meta dd {
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.services-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 48px);
+  margin-top: clamp(28px, 3.4vw, 46px);
+}
+
+.services-note__text { max-width: 46em; }
+
+.services-note__text .section-label { margin-bottom: 12px; }
+
+.services-note__text p {
+  font-size: clamp(14.5px, 1.05vw, 16px);
+  color: var(--ink-soft);
+}
 
 /* ---------- Процесс ---------- */
 

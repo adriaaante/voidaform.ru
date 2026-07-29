@@ -39,12 +39,56 @@
     "address": { "@type": "PostalAddress", "addressLocality": "Москва", "addressCountry": "RU" },
     "areaServed": "Москва и Московская область",
     "openingHours": "Mo-Su 09:00-21:00",
-    "makesOffer": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Дизайн-проект интерьера" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Авторский надзор" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ремонт квартиры под ключ" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Комплектация объекта" } }
-    ]
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги дизайн-бюро Void & Form",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Дизайн-проект интерьера",
+            "serviceType": "Дизайн интерьера квартиры",
+            "description": "Планировочные решения, визуализации, полный комплект рабочих чертежей и спецификаций для строителей. Срок — 1,5–2,5 месяца.",
+            "areaServed": "Москва и Московская область",
+            "provider": { "@id": "https://voidaform.ru/#org" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Авторский надзор",
+            "serviceType": "Авторский надзор за ремонтом",
+            "description": "Контроль соответствия работ проекту, ведение подрядчиков и приёмка ключевых этапов на всём периоде ремонта.",
+            "areaServed": "Москва и Московская область",
+            "provider": { "@id": "https://voidaform.ru/#org" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ремонт квартиры под ключ",
+            "serviceType": "Дизайнерский ремонт квартир под ключ",
+            "description": "Ремонт силами проверенных бригад: смета без сюрпризов, сроки в договоре. Срок — от 4 месяцев.",
+            "areaServed": "Москва и Московская область",
+            "provider": { "@id": "https://voidaform.ru/#org" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Комплектация объекта",
+            "serviceType": "Комплектация интерьера мебелью и светом",
+            "description": "Подбор и закупка мебели, света и декора по проекту с дизайнерскими скидками и логистикой. Срок — 3–6 недель.",
+            "areaServed": "Москва и Московская область",
+            "provider": { "@id": "https://voidaform.ru/#org" }
+          }
+        }
+      ]
+    }
   }
   </script>
   <script type="application/ld+json">
@@ -230,26 +274,41 @@
             <span class="service__num">01</span>
             <h3>Дизайн-проект</h3>
             <p>Планировочные решения, визуализации, полный комплект рабочих чертежей и спецификаций для строителей.</p>
-            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
+            <dl class="service__meta">
+              <dt>Срок</dt><dd>1,5–2,5 месяца</dd>
+            </dl>
           </article>
           <article class="service">
             <span class="service__num">02</span>
             <h3>Авторский надзор</h3>
             <p>Контролируем соответствие работ проекту, ведём подрядчиков и принимаем ключевые этапы за вас.</p>
-            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
+            <dl class="service__meta">
+              <dt>Срок</dt><dd>Весь период ремонта</dd>
+            </dl>
           </article>
           <article class="service">
             <span class="service__num">03</span>
             <h3>Ремонт под ключ</h3>
             <p>Дизайнерский ремонт квартир силами проверенных бригад: смета без сюрпризов, сроки в договоре.</p>
-            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
+            <dl class="service__meta">
+              <dt>Срок</dt><dd>От 4 месяцев</dd>
+            </dl>
           </article>
           <article class="service">
             <span class="service__num">04</span>
             <h3>Комплектация</h3>
             <p>Подбор и закупка мебели, света и декора по проекту — с дизайнерскими скидками и логистикой.</p>
-            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
+            <dl class="service__meta">
+              <dt>Срок</dt><dd>3–6 недель</dd>
+            </dl>
           </article>
+        </div>
+        <div class="services-note reveal">
+          <div class="services-note__text">
+            <span class="section-label">Стоимость</span>
+            <p>Рассчитываем индивидуально: она зависит от площади, состава проекта и объёма работ. Консультация и предварительная смета — бесплатно.</p>
+          </div>
+          <a class="btn" href="tel:+79876543210">Узнать стоимость</a>
         </div>
       </div>
     </section>
