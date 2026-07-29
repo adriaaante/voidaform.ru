@@ -19,9 +19,8 @@
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <link rel="preload" as="image" href="assets/img/hero.jpg">
 
@@ -94,7 +93,12 @@
 
   <header class="header" id="header">
     <div class="container header__in">
-      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
+      <a class="logo" href="./" aria-label="Void &amp; Form — на главную">
+        <svg class="logo__mark" viewBox="-3 -3 206 206" aria-hidden="true">
+          <path d="M0 100V0h200v100a100 100 0 0 1-200 0Z" fill="none" stroke="currentColor" stroke-width="5.4"/>
+        </svg>
+        <span class="logo__text">Void &amp; Form</span>
+      </a>
       <nav class="nav" id="nav" aria-label="Основная навигация">
         <a href="#projects">Проекты</a>
         <a href="#about">Философия</a>
@@ -112,26 +116,28 @@
   <main>
 
     <section class="hero">
-      <div class="hero__bg">
-        <img src="assets/img/hero.jpg" alt="Минималистичный интерьер гостиной в пастельных тонах — проект дизайн-бюро Void & Form" fetchpriority="high">
-      </div>
-      <div class="container hero__in">
-        <h1 class="hero__title">Пустота становится <em>формой</em></h1>
+      <div class="hero__text">
+        <h1 class="hero__title">Пустота становится формой</h1>
         <p class="hero__sub">Авторское дизайн-бюро. Проектируем и реализуем интерьеры квартир, в которых хочется жить — вне трендов и вне времени.</p>
         <div class="hero__cta">
-          <a class="btn btn--light" href="#contacts">Обсудить проект</a>
-          <a class="btn btn--ghost" style="border-color:rgba(253,251,248,.6);color:#FDFBF8" href="#projects">Смотреть проекты</a>
+          <a class="btn" href="#contacts">Обсудить проект</a>
+          <a class="btn btn--ghost" href="#projects">Смотреть проекты</a>
+        </div>
+        <div class="hero__meta">
+          <span>Дизайн</span>
+          <span>Авторский надзор</span>
+          <span>Ремонт</span>
+          <span>Москва</span>
         </div>
       </div>
-      <div class="hero__meta">
-        <span>Дизайн · Надзор · Ремонт</span>
-        <span>Москва</span>
+      <div class="hero__media">
+        <img src="assets/img/hero.jpg" alt="Интерьер гостиной с зелёным диваном и лепным декором — работа дизайн-бюро Void & Form" fetchpriority="high" width="1400" height="2095">
       </div>
     </section>
 
     <section class="manifest reveal">
       <div class="container">
-        <p class="manifest__quote">Мы не гонимся за трендами — мы создаём пространство, которое остаётся актуальным <em>вне времени</em>. Каждый элемент имеет значение, а отсутствие лишнего — эстетический принцип.</p>
+        <p class="manifest__quote">Мы не гонимся за трендами — мы создаём пространство, которое остаётся актуальным вне времени. Каждый элемент имеет значение, а отсутствие лишнего — эстетический принцип.</p>
       </div>
     </section>
 
@@ -140,14 +146,14 @@
         <div class="section__head reveal">
           <div>
             <span class="section-label">Проекты</span>
-            <h2 class="section-title">Интерьеры, которые стремятся <em>быть</em></h2>
+            <h2 class="section-title">Интерьеры, которые стремятся быть</h2>
           </div>
           <p class="lead">Каждый проект — отражение ритма, характера и внутреннего мира человека.</p>
         </div>
         <div class="projects-grid">
           <a class="project-card reveal" href="projects/grafit.html">
             <div class="project-card__media">
-              <span class="project-card__tag">ЖК RedSide</span>
+              <span class="project-card__num">01</span>
               <img src="assets/img/grafit-cover.jpg" alt="Кухня с латунными деталями и барными стульями в оливковом бархате — дизайн-проект квартиры 47,6 м², ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
@@ -158,7 +164,7 @@
           </a>
           <a class="project-card reveal" href="projects/akvarel.html">
             <div class="project-card__media">
-              <span class="project-card__tag">ЖК RedSide</span>
+              <span class="project-card__num">02</span>
               <img src="assets/img/akvarel-cover.jpg" alt="Прихожая с круглым зеркалом и зелёной акцентной стеной — дизайн-проект четырёхкомнатной квартиры, ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
@@ -169,7 +175,7 @@
           </a>
           <a class="project-card reveal" href="projects/glubina.html">
             <div class="project-card__media">
-              <span class="project-card__tag">ЖК RedSide</span>
+              <span class="project-card__num">03</span>
               <img src="assets/img/glubina-cover.jpg" alt="Коридор с книжными стеллажами и линейной подсветкой — дизайн-проект квартиры 159,6 м², ЖК RedSide" loading="lazy">
             </div>
             <div class="project-card__body">
@@ -185,11 +191,11 @@
     <section class="section" id="about">
       <div class="container about">
         <div class="about__media reveal">
-          <img src="assets/img/about-1.jpg" alt="Свет и тень на известняковой стене — деталь интерьера Void & Form" loading="lazy">
+          <img src="assets/img/grafit-6.jpg" alt="Гардеробная со стеклянными фасадами и подсветкой — деталь интерьера Void & Form" loading="lazy">
         </div>
         <div class="about__text reveal">
           <span class="section-label">Философия</span>
-          <h2 class="section-title">Тишина формы и гармония, в которой хочется <em>жить</em></h2>
+          <h2 class="section-title">Тишина формы и гармония, в которой хочется жить</h2>
           <p>Мы верим, что идеальное пространство рождается там, где пустота становится формой, а форма обретает смысл.</p>
           <p>Void &amp; Form разрабатывает интерьеры, где каждый элемент имеет значение. Наши интерьеры не стремятся впечатлить — они стремятся быть.</p>
           <div class="stats">
@@ -199,11 +205,11 @@
             </div>
             <div class="stat">
               <div class="stat__num">64</div>
-              <div class="stat__label">реализованных проекта</div>
+              <div class="stat__label">проекта</div>
             </div>
             <div class="stat">
               <div class="stat__num">8 400</div>
-              <div class="stat__label">м² созданных интерьеров</div>
+              <div class="stat__label">м² интерьеров</div>
             </div>
           </div>
         </div>
@@ -219,30 +225,30 @@
           </div>
           <p class="lead">Полный цикл: продумываем, проектируем, строим и комплектуем. Один договор, одна ответственность.</p>
         </div>
-        <div class="services-grid">
-          <article class="service reveal">
+        <div class="services-grid reveal">
+          <article class="service">
             <span class="service__num">01</span>
             <h3>Дизайн-проект</h3>
             <p>Планировочные решения, визуализации, полный комплект рабочих чертежей и спецификаций для строителей.</p>
-            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
+            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
           </article>
-          <article class="service reveal">
+          <article class="service">
             <span class="service__num">02</span>
             <h3>Авторский надзор</h3>
             <p>Контролируем соответствие работ проекту, ведём подрядчиков и принимаем ключевые этапы за вас.</p>
-            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
+            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
           </article>
-          <article class="service reveal">
+          <article class="service">
             <span class="service__num">03</span>
             <h3>Ремонт под ключ</h3>
             <p>Дизайнерский ремонт квартир силами проверенных бригад: смета без сюрпризов, сроки в договоре.</p>
-            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
+            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
           </article>
-          <article class="service reveal">
+          <article class="service">
             <span class="service__num">04</span>
             <h3>Комплектация</h3>
             <p>Подбор и закупка мебели, света и декора по проекту — с дизайнерскими скидками и логистикой.</p>
-            <span class="service__price">Стоимость уточняется <a href="tel:+79876543210" style="text-decoration:underline">по телефону</a></span>
+            <span class="service__price"><a href="tel:+79876543210">Уточняется по телефону</a></span>
           </article>
         </div>
       </div>
@@ -252,7 +258,7 @@
       <div class="container">
         <div class="section__head reveal">
           <div>
-            <span class="section-label" style="color:rgba(253,251,248,.6)">Процесс</span>
+            <span class="section-label">Процесс</span>
             <h2 class="section-title">Пять шагов к вашему пространству</h2>
           </div>
         </div>
@@ -297,7 +303,7 @@
         <div class="faq reveal">
           <details>
             <summary>Сколько стоит дизайн-проект интерьера?</summary>
-            <p class="faq__a">Стоимость рассчитывается индивидуально — она зависит от площади, состава проекта и объёма работ. Уточните по телефону <a href="tel:+79876543210" style="text-decoration:underline">+7&nbsp;(987)&nbsp;654-32-10</a>: короткая консультация и предварительная смета — бесплатно.</p>
+            <p class="faq__a">Стоимость рассчитывается индивидуально — она зависит от площади, состава проекта и объёма работ. Уточните по телефону <a href="tel:+79876543210">+7&nbsp;(987)&nbsp;654-32-10</a>: короткая консультация и предварительная смета — бесплатно.</p>
           </details>
           <details>
             <summary>Сколько длится ремонт квартиры под ключ?</summary>
@@ -365,16 +371,34 @@
   </main>
 
   <footer class="footer">
-    <div class="container footer__in">
-      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
-      <nav class="footer__nav" aria-label="Навигация в подвале">
-        <a href="#projects">Проекты</a>
-        <a href="#services">Услуги</a>
-        <a href="#contacts">Контакты</a>
-        <a href="privacy.html">Политика конфиденциальности</a>
-      </nav>
-      <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
-      <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
+    <div class="container">
+      <div class="footer__top">
+        <a class="footer__logo" href="./" aria-label="Void &amp; Form — на главную">
+          <svg viewBox="-1.5 -1.5 291 203" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="2.7">
+              <path d="M44 70V0h200v70"/>
+              <path d="M48.606 130A100 100 0 0 0 239.394 130"/>
+              <rect x="0" y="70" width="288" height="60"/>
+            </g>
+            <text x="144" y="112.8" text-anchor="middle" textLength="234.7" lengthAdjust="spacingAndGlyphs"
+                  font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="36.6" font-weight="500" fill="currentColor">VOID &amp; FORM</text>
+          </svg>
+        </a>
+        <nav class="footer__nav" aria-label="Навигация в подвале">
+          <a href="#projects">Проекты</a>
+          <a href="#services">Услуги</a>
+          <a href="#process">Процесс</a>
+          <a href="#contacts">Контакты</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+        </nav>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+79876543210">+7 (987) 654-32-10</a>
+          <span>Москва и Московская область</span>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
+        <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
    style="display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font:600 12.5px/1 system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">
   <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="url(#ffGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <defs><linearGradient id="ffGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8dcf4"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#f5a623"/></linearGradient></defs>
@@ -383,6 +407,7 @@
   </svg>
   <span>Сделано в&nbsp;<span style="font-weight:700;background:linear-gradient(90deg,#c8dcf4,#fff 50%,#f5a623);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">FutureFlow</span></span>
 </a>
+      </div>
     </div>
   </footer>
 

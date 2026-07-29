@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.5 -1.5 291 203" width="291" height="203" role="img" aria-label="Void &amp; Form">
+  <g fill="none" stroke="currentColor" stroke-width="2.7">
+    <path d="M44 70V0h200v70"/>
+    <path d="M48.606 130A100 100 0 0 0 239.394 130"/>
+    <rect x="0" y="70" width="288" height="60"/>
+  </g>
+  <text x="144" y="112.8" text-anchor="middle" textLength="234.7" lengthAdjust="spacingAndGlyphs"
+        font-family="Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-size="36.6" font-weight="500" fill="currentColor">VOID &amp; FORM</text>
+</svg>

@@ -8,16 +8,20 @@
   <link rel="canonical" href="https://voidaform.ru/privacy.html">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="header is-scrolled" id="header">
     <div class="container header__in">
-      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
+      <a class="logo" href="./" aria-label="Void &amp; Form — на главную">
+        <svg class="logo__mark" viewBox="-3 -3 206 206" aria-hidden="true">
+          <path d="M0 100V0h200v100a100 100 0 0 1-200 0Z" fill="none" stroke="currentColor" stroke-width="5.4"/>
+        </svg>
+        <span class="logo__text">Void &amp; Form</span>
+      </a>
       <nav class="nav" id="nav" aria-label="Основная навигация">
         <a href="index.html#projects">Проекты</a>
         <a href="index.html#about">Философия</a>
@@ -34,25 +38,54 @@
 
   <main>
     <section class="project-hero">
-      <div class="container" style="max-width: 860px">
-        <h1 style="font-size: clamp(30px, 4vw, 48px)">Политика обработки персональных данных</h1>
-        <div style="margin-top: 32px; color: var(--ink-soft); display: flex; flex-direction: column; gap: 16px">
-          <p>1. Настоящая политика описывает порядок обработки персональных данных посетителей сайта voidaform.ru (далее — Сайт) в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-          <p>2. Отправляя форму на Сайте, вы даёте согласие на обработку указанных вами данных: имени, номера телефона и содержания сообщения.</p>
-          <p>3. Данные используются исключительно для связи с вами по вашему запросу: консультации, расчёта стоимости и обсуждения проекта. Данные не передаются третьим лицам и не используются для рассылок без вашего отдельного согласия.</p>
-          <p>4. Срок обработки данных — до достижения цели обработки либо до отзыва согласия. Отозвать согласие можно, позвонив по телефону <a href="tel:+79876543210" style="text-decoration: underline">+7 (987) 654-32-10</a>.</p>
-          <p>5. Мы принимаем необходимые организационные и технические меры для защиты персональных данных от неправомерного доступа, изменения, раскрытия или уничтожения.</p>
+      <div class="container">
+        <div class="text-page">
+          <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="./">Главная</a><span>/</span><span>Политика</span>
+          </nav>
+          <h1 style="font-size: clamp(28px, 3.6vw, 46px)">Политика обработки персональных данных</h1>
+          <div class="text-page__body">
+            <p>1. Настоящая политика описывает порядок обработки персональных данных посетителей сайта voidaform.ru (далее — Сайт) в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+            <p>2. Отправляя форму на Сайте, вы даёте согласие на обработку указанных вами данных: имени, номера телефона и содержания сообщения.</p>
+            <p>3. Данные используются исключительно для связи с вами по вашему запросу: консультации, расчёта стоимости и обсуждения проекта. Данные не передаются третьим лицам и не используются для рассылок без вашего отдельного согласия.</p>
+            <p>4. Срок обработки данных — до достижения цели обработки либо до отзыва согласия. Отозвать согласие можно, позвонив по телефону <a href="tel:+79876543210">+7 (987) 654-32-10</a>.</p>
+            <p>5. Мы принимаем необходимые организационные и технические меры для защиты персональных данных от неправомерного доступа, изменения, раскрытия или уничтожения.</p>
+          </div>
+          <p style="margin-top: 44px"><a class="btn btn--ghost" href="./">Вернуться на главную</a></p>
         </div>
-        <p style="margin-top: 40px"><a class="btn btn--ghost" href="./">← Вернуться на главную</a></p>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer__in">
-      <a class="logo" href="./">Void <span>&amp;</span> Form</a>
-      <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
-      <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
+    <div class="container">
+      <div class="footer__top">
+        <a class="footer__logo" href="./" aria-label="Void &amp; Form — на главную">
+          <svg viewBox="-1.5 -1.5 291 203" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="2.7">
+              <path d="M44 70V0h200v70"/>
+              <path d="M48.606 130A100 100 0 0 0 239.394 130"/>
+              <rect x="0" y="70" width="288" height="60"/>
+            </g>
+            <text x="144" y="112.8" text-anchor="middle" textLength="234.7" lengthAdjust="spacingAndGlyphs"
+                  font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="36.6" font-weight="500" fill="currentColor">VOID &amp; FORM</text>
+          </svg>
+        </a>
+        <nav class="footer__nav" aria-label="Навигация в подвале">
+          <a href="index.html#projects">Проекты</a>
+          <a href="index.html#services">Услуги</a>
+          <a href="index.html#process">Процесс</a>
+          <a href="index.html#contacts">Контакты</a>
+          <a href="privacy.html">Политика конфиденциальности</a>
+        </nav>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+79876543210">+7 (987) 654-32-10</a>
+          <span>Москва и Московская область</span>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
+        <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
    style="display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font:600 12.5px/1 system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">
   <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="url(#ffGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <defs><linearGradient id="ffGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8dcf4"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#f5a623"/></linearGradient></defs>
@@ -61,6 +94,7 @@
   </svg>
   <span>Сделано в&nbsp;<span style="font-weight:700;background:linear-gradient(90deg,#c8dcf4,#fff 50%,#f5a623);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">FutureFlow</span></span>
 </a>
+      </div>
     </div>
   </footer>
 

@@ -19,9 +19,8 @@
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="../assets/fonts/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/style.css">
 
   <script type="application/ld+json">
@@ -40,7 +39,12 @@
 
   <header class="header is-scrolled" id="header">
     <div class="container header__in">
-      <a class="logo" href="../">Void <span>&amp;</span> Form</a>
+      <a class="logo" href="../" aria-label="Void &amp; Form — на главную">
+        <svg class="logo__mark" viewBox="-3 -3 206 206" aria-hidden="true">
+          <path d="M0 100V0h200v100a100 100 0 0 1-200 0Z" fill="none" stroke="currentColor" stroke-width="5.4"/>
+        </svg>
+        <span class="logo__text">Void &amp; Form</span>
+      </a>
       <nav class="nav" id="nav" aria-label="Основная навигация">
         <a href="../index.html#projects">Проекты</a>
         <a href="../index.html#about">Философия</a>
@@ -93,26 +97,46 @@
     </section>
 
     <section class="section section--soft">
-      <div class="container" style="text-align:center">
-        <h2 class="section-title reveal" style="margin: 0 auto 28px">Хотите так же — но по-своему?</h2>
-        <a class="btn reveal" href="../index.html#contacts">Обсудить проект</a>
-        <nav class="project-nav container" aria-label="Другие проекты">
-          <a href="akvarel.html">← «Акварель»</a>
-          <a href="grafit.html">«Графит» →</a>
+      <div class="container">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px">
+          <h2 class="section-title reveal" style="max-width:12em">Хотите так же — но по-своему?</h2>
+          <a class="btn reveal" href="../index.html#contacts">Обсудить проект</a>
+        </div>
+        <nav class="project-nav" aria-label="Другие проекты">
+          <a href="akvarel.html">← Акварель</a>
+          <a href="grafit.html">Графит →</a>
         </nav>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer__in">
-      <a class="logo" href="../">Void <span>&amp;</span> Form</a>
-      <nav class="footer__nav" aria-label="Навигация в подвале">
-        <a href="../index.html#projects">Проекты</a>
-        <a href="../index.html#services">Услуги</a>
-        <a href="../index.html#contacts">Контакты</a>
-        <a href="../privacy.html">Политика конфиденциальности</a>
-      </nav>
+    <div class="container">
+      <div class="footer__top">
+        <a class="footer__logo" href="../" aria-label="Void &amp; Form — на главную">
+          <svg viewBox="-1.5 -1.5 291 203" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="2.7">
+              <path d="M44 70V0h200v70"/>
+              <path d="M48.606 130A100 100 0 0 0 239.394 130"/>
+              <rect x="0" y="70" width="288" height="60"/>
+            </g>
+            <text x="144" y="112.8" text-anchor="middle" textLength="234.7" lengthAdjust="spacingAndGlyphs"
+                  font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="36.6" font-weight="500" fill="currentColor">VOID &amp; FORM</text>
+          </svg>
+        </a>
+        <nav class="footer__nav" aria-label="Навигация в подвале">
+          <a href="../index.html#projects">Проекты</a>
+          <a href="../index.html#services">Услуги</a>
+          <a href="../index.html#process">Процесс</a>
+          <a href="../index.html#contacts">Контакты</a>
+          <a href="../privacy.html">Политика конфиденциальности</a>
+        </nav>
+        <div class="footer__contact">
+          <a class="footer__phone" href="tel:+79876543210">+7 (987) 654-32-10</a>
+          <span>Москва и Московская область</span>
+        </div>
+      </div>
+      <div class="footer__bottom">
       <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
       <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
    style="display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font:600 12.5px/1 system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif">
@@ -123,6 +147,7 @@
   </svg>
   <span>Сделано в&nbsp;<span style="font-weight:700;background:linear-gradient(90deg,#c8dcf4,#fff 50%,#f5a623);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">FutureFlow</span></span>
 </a>
+      </div>
     </div>
   </footer>
 
