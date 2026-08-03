@@ -1,0 +1,49 @@
+# voidaform.ru — статический сайт (Apache/Beget)
+
+RewriteEngine On
+
+# Всегда https и без www
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# Адреса старого сайта на WordPress — чтобы ссылки из поиска не отдавали 404
+RedirectMatch 301 ^/about/?$          https://voidaform.ru/#about
+RedirectMatch 301 ^/service/?$        https://voidaform.ru/#services
+RedirectMatch 301 ^/services/?$       https://voidaform.ru/#services
+RedirectMatch 301 ^/contacts/?$       https://voidaform.ru/#contacts
+RedirectMatch 301 ^/contact/?$        https://voidaform.ru/#contacts
+RedirectMatch 301 ^/(feed|comments/feed)/?$ https://voidaform.ru/
+RedirectMatch 301 ^/wp-(admin|login|content|includes|json|sitemap).*$ https://voidaform.ru/
+
+ErrorDocument 404 /404.html
+
+# Кэширование статики
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html            "access plus 0 seconds"
+  ExpiresByType text/css             "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg           "access plus 1 year"
+  ExpiresByType image/png            "access plus 1 year"
+  ExpiresByType image/svg+xml        "access plus 1 year"
+  ExpiresByType font/woff2           "access plus 1 year"
+</IfModule>
+
+# Сжатие (woff2 и jpeg уже сжаты — не трогаем)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  <FilesMatch "\.woff2$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+# Индексный файл
+DirectoryIndex index.html
