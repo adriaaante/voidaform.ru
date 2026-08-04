@@ -9,6 +9,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
+# Архив старого сайта: файлы лежат в _old_wp, но наружу не отдаются
+RewriteRule ^_old_wp(/|$) - [F,L]
+
 # Адреса старого сайта на WordPress — чтобы ссылки из поиска не отдавали 404
 RedirectMatch 301 ^/about/?$          https://voidaform.ru/#about
 RedirectMatch 301 ^/service/?$        https://voidaform.ru/#services

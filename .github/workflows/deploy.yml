@@ -28,6 +28,44 @@ jobs:
           done
           echo "все ключевые файлы на месте"
 
+      # Разовая уборка: старый сайт на WordPress переезжает в папку _old_wp.
+      # Файлы сохраняются, но доступ к ним закрыт в .htaccess.
+      # Шаг безопасен при повторных запусках: если переносить уже нечего,
+      # команды просто ничего не делают и деплой продолжается.
+      - name: Убрать старый WordPress в архивную папку
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" <<'LFTP'
+          set cmd:fail-exit no
+          set ftp:passive-mode on
+          set ssl:verify-certificate no
+          mkdir -p _old_wp
+          mv wp-admin            _old_wp/wp-admin
+          mv wp-content          _old_wp/wp-content
+          mv wp-includes         _old_wp/wp-includes
+          mv index.php           _old_wp/index.php
+          mv xmlrpc.php          _old_wp/xmlrpc.php
+          mv wp-activate.php     _old_wp/wp-activate.php
+          mv wp-blog-header.php  _old_wp/wp-blog-header.php
+          mv wp-comments-post.php _old_wp/wp-comments-post.php
+          mv wp-config.php       _old_wp/wp-config.php
+          mv wp-config-sample.php _old_wp/wp-config-sample.php
+          mv wp-cron.php         _old_wp/wp-cron.php
+          mv wp-links-opml.php   _old_wp/wp-links-opml.php
+          mv wp-load.php         _old_wp/wp-load.php
+          mv wp-login.php        _old_wp/wp-login.php
+          mv wp-mail.php         _old_wp/wp-mail.php
+          mv wp-settings.php     _old_wp/wp-settings.php
+          mv wp-signup.php       _old_wp/wp-signup.php
+          mv wp-trackback.php    _old_wp/wp-trackback.php
+          mv license.txt         _old_wp/license.txt
+          mv readme.html         _old_wp/readme.html
+          cls -1
+          bye
+          LFTP
+          echo "уборка завершена"
+
       - name: Залить на хостинг по FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
