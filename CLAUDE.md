@@ -58,7 +58,7 @@
 
 ## Деплой
 - Хостинг — **Beget** (аккаунт `dudareid`, сервер `ssl.dream.beget.com`),
-  там же DNS и почта домена. Папка сайта: `voidaform.ru/public_html/`.
+  там же DNS и почта домена. Папка сайта: `dudareid.beget.tech/public_html/` (домен привязан к техдомену).
 - Выкладка автоматическая: push в `main` → GitHub Actions
   (`.github/workflows/deploy.yml`) заливает файлы по FTP.
   Доступы лежат в секретах репозитория: `FTP_SERVER`, `FTP_USERNAME`,
