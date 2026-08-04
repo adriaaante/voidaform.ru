@@ -57,5 +57,15 @@
   Ожидаемый результат — «✓ проблем не найдено».
 
 ## Деплой
-Хостинг не настроен. Деплой = выложить содержимое репозитория как есть
-(статические файлы) на любой хостинг под доменом voidaform.ru.
+- Хостинг — **Beget** (аккаунт `dudareid`, сервер `ssl.dream.beget.com`),
+  там же DNS и почта домена. Папка сайта: `voidaform.ru/public_html/`.
+- Выкладка автоматическая: push в `main` → GitHub Actions
+  (`.github/workflows/deploy.yml`) заливает файлы по FTP.
+  Доступы лежат в секретах репозитория: `FTP_SERVER`, `FTP_USERNAME`,
+  `FTP_PASSWORD`, `FTP_DIR`. Подробности и разбор ошибок — в `DEPLOY.md`.
+- На хостинг едут только файлы сайта; `scripts/`, `.github/`, `CLAUDE.md`
+  и `DEPLOY.md` исключены в секции `exclude` воркфлоу.
+- `.htaccess` — https и без www, 301 со старых адресов WordPress
+  (`/about/`, `/service/`, `/contacts/`, `/wp-*`), кэш и gzip.
+- До первой выкладки нужно вручную очистить `public_html` от старого
+  WordPress-сайта — FTP-деплой чужие файлы не удаляет.
