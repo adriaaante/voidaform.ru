@@ -61,8 +61,9 @@
   там же DNS и почта домена. Папка сайта: `dudareid.beget.tech/public_html/` (домен привязан к техдомену).
 - Выкладка автоматическая: push в `main` → GitHub Actions
   (`.github/workflows/deploy.yml`) заливает файлы по FTP.
-  Доступы лежат в секретах репозитория: `FTP_SERVER`, `FTP_USERNAME`,
-  `FTP_PASSWORD`, `FTP_DIR`. Подробности и разбор ошибок — в `DEPLOY.md`.
+  Доступы в секретах репозитория: `FTP_SERVER`=dudareid.beget.tech,
+  `FTP_USERNAME`=dudareid_deploy (привязан к папке сайта), `FTP_DIR`=`/`,
+  `FTP_PASSWORD`. Подробности и разбор ошибок — в `DEPLOY.md`.
 - На хостинг едут только файлы сайта; `scripts/`, `.github/`, `CLAUDE.md`
   и `DEPLOY.md` исключены в секции `exclude` воркфлоу.
 - `.htaccess` — https и без www, 301 со старых адресов WordPress

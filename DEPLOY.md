@@ -61,17 +61,18 @@
 
 | Имя секрета | Значение |
 |---|---|
-| `FTP_SERVER` | адрес FTP-сервера (например `ftp.beget.com`) |
-| `FTP_USERNAME` | логин FTP |
-| `FTP_PASSWORD` | пароль FTP |
-| `FTP_DIR` | `dudareid.beget.tech/public_html/` |
+| `FTP_SERVER` | `dudareid.beget.tech` |
+| `FTP_USERNAME` | `dudareid_deploy` |
+| `FTP_PASSWORD` | пароль, выданный при создании аккаунта |
+| `FTP_DIR` | `/` |
 
 Секреты хранятся в зашифрованном виде и не видны в логах.
 
-> Домен voidaform.ru привязан к папке технического домена — проверено
-> в файловом менеджере. Поэтому путь именно `dudareid.beget.tech/public_html/`,
+> `FTP_DIR` равен `/`, потому что FTP-аккаунт `dudareid_deploy` создан
+> с привязкой к `/dudareid.beget.tech/public_html/` — при подключении он
+> сразу попадает в папку сайта и выше неё не поднимается.
+> Домен voidaform.ru указывает на папку технического домена, отдельной
 > папки `voidaform.ru/` на аккаунте нет.
-> Если FTP-аккаунт создан сразу с привязкой к этой папке — тогда `/`.
 
 ---
 
