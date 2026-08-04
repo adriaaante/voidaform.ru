@@ -9,11 +9,14 @@
 import html
 import pathlib
 
+from PIL import Image  # только для чтения размеров изображений
+
 SITE = "https://voidaform.ru"
 
 PROJECTS = [
     {
         "slug": "grafit",
+        "h1sub": "Дизайн-проект квартиры 47,6 м² в ЖК RedSide, Москва",
         "name": "Графит",
         "type": "Квартира",
         "facts": [
@@ -43,6 +46,7 @@ PROJECTS = [
     },
     {
         "slug": "akvarel",
+        "h1sub": "Дизайн-проект четырёхкомнатной квартиры в ЖК RedSide, Москва",
         "name": "Акварель",
         "type": "Квартира",
         "facts": [
@@ -72,6 +76,7 @@ PROJECTS = [
     },
     {
         "slug": "glubina",
+        "h1sub": "Дизайн-проект квартиры 159,6 м² в ЖК RedSide, Москва",
         "name": "Глубина",
         "type": "Квартира",
         "facts": [
@@ -137,6 +142,24 @@ TEMPLATE = """<!DOCTYPE html>
     ]
   }}
   </script>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": "{site}/projects/{slug}.html#project",
+    "name": "«{name}» — {h1sub}",
+    "headline": "{h1sub}",
+    "description": "{seo}",
+    "image": [{images}],
+    "creator": {{ "@id": "{site}/#org" }},
+    "provider": {{ "@id": "{site}/#org" }},
+    "locationCreated": {{ "@type": "Place", "name": "{location}" }},
+    "dateCreated": "{year}",
+    "inLanguage": "ru-RU",
+    "keywords": "дизайн интерьера, {type_lc}, {area}, ремонт под ключ, Москва",
+    "url": "{site}/projects/{slug}.html"
+  }}
+  </script>
 </head>
 <body>
 
@@ -168,7 +191,7 @@ TEMPLATE = """<!DOCTYPE html>
         <nav class="breadcrumbs" aria-label="Хлебные крошки">
           <a href="../">Главная</a><span>/</span><a href="../index.html#projects">Проекты</a><span>/</span><span>«{name}»</span>
         </nav>
-        <h1>«{name}»</h1>
+        <h1>«{name}»<span class="project-hero__sub">{h1sub}</span></h1>
         <div class="project-facts">
 {facts}
         </div>
@@ -274,15 +297,27 @@ def main() -> None:
         for idx, (img, wide, alt) in enumerate(p["gallery"]):
             cls = ' class="is-wide reveal"' if wide else ' class="reveal"'
             lazy = "" if idx == 0 else ' loading="lazy"'
+            # размеры проставляем реальные — иначе при загрузке «прыгает» вёрстка
+            w, h = Image.open(root / "assets" / "img" / img).size
             gallery_rows.append(
-                '        <figure{cls}><img src="../assets/img/{img}" alt="{alt}"{lazy}></figure>'.format(
-                    cls=cls, img=img, alt=html.escape(alt, quote=True), lazy=lazy
+                '        <figure{cls}><img src="../assets/img/{img}" alt="{alt}"'
+                ' width="{w}" height="{h}"{lazy}></figure>'.format(
+                    cls=cls, img=img, alt=html.escape(alt, quote=True), w=w, h=h, lazy=lazy
                 )
             )
+        images = ", ".join(
+            '"{}/assets/img/{}"'.format(SITE, img) for img, _, _ in p["gallery"]
+        )
+        location = next((v for k, v in p["facts"] if k == "Локация"), "Москва")
+        year = next((v for k, v in p["facts"] if k == "Год"), "2019")
         page = TEMPLATE.format(
             site=SITE,
             slug=p["slug"],
             name=p["name"],
+            h1sub=html.escape(p["h1sub"]),
+            images=images,
+            location=html.escape(location),
+            year=year,
             type_lc=p["type"].lower(),
             area=p["area"],
             short=p["short"],
