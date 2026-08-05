@@ -155,8 +155,14 @@
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       lockScroll(true);
-      var first = modal.querySelector("input[type=text], input[type=tel]");
+      // на телефоне не ставим фокус в поле: иначе сразу вылезает клавиатура
+      // и закрывает собой окно. Фокус уходит на само окно — им же
+      // ограничивается таб-обход, а клавиатура появится по тапу в поле.
+      var box = modal.querySelector(".modal__box");
+      var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      var first = finePointer && modal.querySelector("input[type=text], input[type=tel]");
       if (first) first.focus();
+      else if (box) box.focus();
     }
 
     function closeModal() {
@@ -181,10 +187,15 @@
       if (e.key === "Escape") { closeModal(); return; }
       if (e.key !== "Tab") return;
       // не выпускаем фокус за пределы окна, пока оно открыто
-      var items = modal.querySelectorAll("a[href], button, input, textarea");
+      var items = modal.querySelectorAll("a[href], button, input:not([type=hidden]), textarea");
       if (!items.length) return;
       var first = items[0], last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      // фокус на самом окне (так открывается на телефоне) — заводим его внутрь
+      if ([].indexOf.call(items, document.activeElement) === -1) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      }
+      else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   }
