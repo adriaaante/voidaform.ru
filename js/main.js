@@ -15,8 +15,6 @@
 
   function onScroll() {
     header.classList.toggle("is-scrolled", window.scrollY > 24);
-    // кнопка связи появляется, когда первый экран пролистан
-    if (fab) fab.classList.toggle("is-visible", window.scrollY > 400);
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
