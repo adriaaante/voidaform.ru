@@ -200,6 +200,13 @@ h1, h2, h3 {
 .nav a:hover { color: var(--ink); }
 .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 
+.header__contacts {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 18px);
+  flex-shrink: 0;
+}
+
 .header__phone {
   font-size: 13px;
   font-weight: 600;
@@ -208,6 +215,25 @@ h1, h2, h3 {
   padding: 12px 0;
   transition: color .3s;
 }
+
+.header__messengers { display: flex; gap: 6px; }
+
+.header__messengers a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
+}
+
+.header__messengers svg { width: 16px; height: 16px; fill: currentColor; }
+
+.header__messengers a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* контакты внутри мобильного меню — на десктопе не нужны */
+.nav__contacts { display: none; }
 
 .header__phone:hover { color: var(--accent); }
 
@@ -1012,7 +1038,41 @@ a.messenger:hover {
   .header.is-menu-open .logo { position: relative; z-index: 56; }
 
   .burger { display: flex; position: relative; z-index: 56; }
-  .header__phone { display: none; }
+  .header__contacts { display: none; }
+
+  /* телефон и мессенджеры переезжают в раскрытое меню */
+  .nav__contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-top: 26px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+    width: min(280px, 68%);
+  }
+
+  .nav__phone {
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink);
+    padding: 6px 0;
+  }
+
+  .nav__messengers { display: flex; gap: 12px; }
+
+  .nav__messengers a {
+    width: 48px;
+    height: 48px;
+    padding: 0; /* иначе отступ пунктов меню (.nav a) схлопывает иконку */
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  .nav__messengers svg { width: 19px; height: 19px; fill: currentColor; }
 
   /* hero складывается: фото сверху, текст снизу */
   .hero {
