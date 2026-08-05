@@ -85,7 +85,7 @@
         "Имя: " + name + "\n" +
         "Телефон: " + phone +
         (message ? "\nО проекте: " + message : "");
-      window.open("https://wa.me/79876543210?text=" + encodeURIComponent(text), "_blank", "noopener");
+      window.open("https://wa.me/79677711120?text=" + encodeURIComponent(text), "_blank", "noopener");
       form.classList.add("is-done");
       form.querySelector("button[type=submit]").disabled = true;
     });

@@ -641,6 +641,45 @@ h1, h2, h3 {
 
 .contact__row a { padding: 8px 0; }
 
+/* Мессенджеры — монохромные кнопки в духе остального сайта */
+.messengers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+/* селектор с тегом — иначе более специфичное .contact__row a перебивает flex */
+a.messenger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
+}
+
+a.messenger svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+a.messenger:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
 .contact__row a:hover { color: var(--accent); }
 
 .form {
@@ -737,7 +776,31 @@ h1, h2, h3 {
 .footer__nav a { padding: 12px 0; transition: color .3s; }
 .footer a:hover { color: #fff; }
 
-.footer__contact { display: flex; flex-direction: column; gap: 6px; }
+.footer__contact { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+
+.footer__mail {
+  display: inline-block;
+  padding: 6px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, .78);
+  transition: color .3s;
+}
+
+.footer__messengers { display: flex; gap: 10px; margin-top: 12px; }
+
+.footer__messengers a {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-dark);
+  color: rgba(255, 255, 255, .8);
+  transition: background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease);
+}
+
+.footer__messengers svg { width: 18px; height: 18px; fill: currentColor; }
+
+.footer__messengers a:hover { background: #fff; border-color: #fff; color: var(--dark); }
 
 .footer__phone {
   display: inline-block;
