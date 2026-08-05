@@ -19,6 +19,14 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  function closeMenu() {
+    if (!burger || !header.classList.contains("is-menu-open")) return;
+    header.classList.remove("is-menu-open");
+    burger.classList.remove("is-open");
+    burger.setAttribute("aria-expanded", "false");
+    lockScroll(false);
+  }
+
   if (burger) {
     burger.addEventListener("click", function () {
       var open = header.classList.toggle("is-menu-open");
@@ -27,12 +35,7 @@
       lockScroll(open);
     });
     nav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) {
-        header.classList.remove("is-menu-open");
-        burger.classList.remove("is-open");
-        burger.setAttribute("aria-expanded", "false");
-        lockScroll(false);
-      }
+      if (e.target.closest("a")) closeMenu();
     });
 
     document.addEventListener("keydown", function (e) {
@@ -88,11 +91,14 @@
       if (!form.reportValidity()) return;
       var msgField = form.elements.message;
       var message = msgField ? msgField.value.trim() : "";
+      var srcField = form.elements.source;
+      var source = srcField ? srcField.value.trim() : "";
       var text =
         "Заявка с сайта voidaform.ru\n" +
         "Имя: " + form.elements.name.value.trim() + "\n" +
         "Телефон: " + form.elements.phone.value.trim() +
-        (message ? "\nО проекте: " + message : "");
+        (message ? "\nО проекте: " + message : "") +
+        (source ? "\nОткуда: " + source : "");
       window.open("https://wa.me/79677711120?text=" + encodeURIComponent(text), "_blank", "noopener");
       form.classList.add("is-done");
       form.querySelector("button[type=submit]").disabled = true;
@@ -128,14 +134,28 @@
   var modal = document.getElementById("callback-modal");
   if (modal) {
     var lastFocused = null;
+    var modalTitle = document.getElementById("callback-title");
+    var modalSource = modal.querySelector("input[name=source]");
+    var defaultTitle = modalTitle ? modalTitle.textContent : "";
+    // на внутренних страницах title вида «Проект «Графит» — 47,6 м² | Void & Form»:
+    // берём только имя страницы, на главной источник и так очевиден
+    var pageName = document.title.indexOf("|") > -1
+      ? document.title.split("|")[0].split("—")[0].trim()
+      : "";
 
-    function openModal() {
+    // label — надпись на кнопке, по которой открыли окно: она же
+    // становится заголовком и уходит в заявку как источник обращения
+    function openModal(label) {
       lastFocused = document.activeElement;
       closeFab();
+      if (modalTitle) modalTitle.textContent = label || defaultTitle;
+      if (modalSource) {
+        modalSource.value = (label || defaultTitle) + (pageName ? " · " + pageName : "");
+      }
       modal.classList.add("is-open");
       modal.setAttribute("aria-hidden", "false");
       lockScroll(true);
-      var first = modal.querySelector("input[type=text], input[type=tel], input");
+      var first = modal.querySelector("input[type=text], input[type=tel]");
       if (first) first.focus();
     }
 
@@ -147,8 +167,13 @@
     }
 
     document.addEventListener("click", function (e) {
-      if (e.target.closest("[data-modal-open]")) { e.preventDefault(); openModal(); }
-      else if (e.target.closest("[data-modal-close]")) closeModal();
+      var trigger = e.target.closest("[data-modal-open]");
+      if (trigger) {
+        // ссылка на #contacts остаётся в разметке как запасной путь без JS
+        e.preventDefault();
+        closeMenu();
+        openModal(trigger.getAttribute("data-modal-open") || trigger.textContent.trim());
+      } else if (e.target.closest("[data-modal-close]")) closeModal();
     });
 
     document.addEventListener("keydown", function (e) {

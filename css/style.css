@@ -135,9 +135,9 @@ h1, h2, h3 {
 
 /* компактный вариант — для шапки */
 .btn--sm {
-  padding: 13px 20px;
-  font-size: 10.5px;
-  letter-spacing: .14em;
+  padding: 13px 19px;
+  font-size: 11px;
+  letter-spacing: .12em;
   white-space: nowrap;
 }
 
@@ -207,6 +207,16 @@ h1, h2, h3 {
 
 .nav a:hover { color: var(--ink); }
 .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* призыв-кнопка внутри меню не должна перенимать оформление пунктов */
+.nav a.btn {
+  padding: 17px 28px;
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: #fff;
+}
+.nav a.btn:hover { color: var(--ink); }
+.nav a.btn::after { display: none; }
 
 .header__contacts {
   display: flex;
