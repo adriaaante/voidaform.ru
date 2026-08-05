@@ -133,6 +133,14 @@ h1, h2, h3 {
 .btn--ghost { background: transparent; color: var(--ink); }
 .btn--ghost:hover { background: var(--ink); color: #fff; }
 
+/* компактный вариант — для шапки */
+.btn--sm {
+  padding: 13px 20px;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
+
 /* ---------- Шапка ---------- */
 
 .header {
@@ -218,24 +226,19 @@ h1, h2, h3 {
 
 .header__messengers { display: flex; gap: 6px; }
 
-.header__messengers a,
-.header__messengers .messenger-btn {
+.header__messengers a {
   width: 38px;
   height: 38px;
-  padding: 0;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
-  background: transparent;
   color: var(--ink);
-  cursor: pointer;
   transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
 }
 
 .header__messengers svg { width: 16px; height: 16px; fill: currentColor; }
 
-.header__messengers a:hover,
-.header__messengers .messenger-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.header__messengers a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 
 /* контакты внутри мобильного меню — на десктопе не нужны */
 .nav__contacts { display: none; }
@@ -971,12 +974,12 @@ a.messenger:hover {
 
 .fab {
   position: fixed;
-  left: clamp(14px, 4vw, 22px);
+  right: clamp(14px, 4vw, 22px);
   bottom: clamp(14px, 4vw, 22px);
   z-index: 70;
   display: none;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 10px;
   opacity: 0;
   visibility: hidden;
@@ -993,6 +996,7 @@ body.is-locked .fab { opacity: 0; visibility: hidden; pointer-events: none; }
 .fab__menu {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 8px;
   opacity: 0;
   visibility: hidden;
@@ -1054,7 +1058,7 @@ body.is-locked .fab { opacity: 0; visibility: hidden; pointer-events: none; }
   70%, 100% { transform: scale(1.45); opacity: 0; }
 }
 
-@media (max-width: 900px) { .fab { display: flex; } }
+@media (max-width: 999px) { .fab { display: flex; } }
 
 @media (prefers-reduced-motion: reduce) {
   .fab, .fab__menu { transition: none; }
@@ -1204,7 +1208,7 @@ body.is-locked .fab { opacity: 0; visibility: hidden; pointer-events: none; }
   .projects-grid .project-card:last-child:nth-child(odd) .project-card__media { aspect-ratio: 16 / 9; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 999px) {
   .nav {
     position: fixed;
     inset: 0;
@@ -1265,8 +1269,19 @@ body.is-locked .fab { opacity: 0; visibility: hidden; pointer-events: none; }
   }
 
   .nav__messengers svg { width: 19px; height: 19px; fill: currentColor; }
-  .nav__messengers .messenger-btn svg { width: 19px; height: 19px; }
 
+  .nav__cta { width: 100%; justify-content: center; }
+  .nav__messengers .messenger-btn svg { width: 19px; height: 19px; }
+}
+
+/* на средних экранах в шапке остаётся только главный призыв:
+   телефон и мессенджеры не помещаются рядом с навигацией */
+@media (min-width: 1000px) and (max-width: 1250px) {
+  .header__phone,
+  .header__messengers { display: none; }
+}
+
+@media (max-width: 900px) {
   /* hero складывается: фото сверху, текст снизу */
   .hero {
     grid-template-columns: 1fr;
