@@ -218,19 +218,24 @@ h1, h2, h3 {
 
 .header__messengers { display: flex; gap: 6px; }
 
-.header__messengers a {
+.header__messengers a,
+.header__messengers .messenger-btn {
   width: 38px;
   height: 38px;
+  padding: 0;
   display: grid;
   place-items: center;
   border: 1px solid var(--line);
+  background: transparent;
   color: var(--ink);
+  cursor: pointer;
   transition: background .35s var(--ease), border-color .35s var(--ease), color .35s var(--ease);
 }
 
 .header__messengers svg { width: 16px; height: 16px; fill: currentColor; }
 
-.header__messengers a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.header__messengers a:hover,
+.header__messengers .messenger-btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
 
 /* контакты внутри мобильного меню — на десктопе не нужны */
 .nav__contacts { display: none; }
@@ -962,6 +967,190 @@ a.messenger:hover {
 .text-page__body p { color: var(--ink-soft); font-size: 15px; }
 .text-page__body a { text-decoration: underline; text-underline-offset: 3px; }
 
+/* ---------- Плавающая кнопка связи (только смартфоны) ---------- */
+
+.fab {
+  position: fixed;
+  left: clamp(14px, 4vw, 22px);
+  bottom: clamp(14px, 4vw, 22px);
+  z-index: 70;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+}
+
+/* появляется после прокрутки — не закрывает первый экран */
+.fab.is-visible { opacity: 1; visibility: visible; transform: none; }
+
+/* прячем, когда открыто меню или модальное окно */
+body.is-locked .fab { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.fab__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+}
+
+.fab.is-open .fab__menu { opacity: 1; visibility: visible; transform: none; }
+
+.fab__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px 0 14px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px -14px rgba(0, 0, 0, .35);
+}
+
+.fab__item svg { width: 18px; height: 18px; flex-shrink: 0; fill: currentColor; }
+
+.fab__toggle {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .5);
+}
+
+.fab__toggle svg { width: 22px; height: 22px; fill: currentColor; transition: transform .35s var(--ease); }
+.fab.is-open .fab__toggle svg { transform: rotate(45deg); }
+
+/* мягкая пульсация — привлекает внимание, но не мельтешит */
+.fab__toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid var(--ink);
+  animation: fabPulse 3.4s ease-out infinite;
+  pointer-events: none;
+}
+
+.fab.is-open .fab__toggle::after { animation: none; }
+
+@keyframes fabPulse {
+  0%        { transform: scale(1);    opacity: .55; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+
+@media (max-width: 900px) { .fab { display: flex; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fab, .fab__menu { transition: none; }
+  .fab__toggle::after { animation: none; }
+}
+
+/* ---------- Модальное окно с формой ---------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 5vw, 40px);
+}
+
+.modal.is-open { display: flex; }
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, .55);
+  backdrop-filter: blur(2px);
+}
+
+.modal__box {
+  position: relative;
+  width: min(460px, 100%);
+  max-height: 92svh;
+  overflow-y: auto;
+  padding: clamp(26px, 5vw, 40px);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  animation: modalIn .35s var(--ease);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: color .3s;
+}
+
+.modal__close:hover { color: var(--ink); }
+
+.modal__close::before,
+.modal__close::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 1px;
+  background: currentColor;
+}
+
+.modal__close::before { transform: rotate(45deg); }
+.modal__close::after  { transform: rotate(-45deg); }
+
+.modal__title {
+  font-size: clamp(21px, 2.6vw, 28px);
+  font-weight: 300;
+  letter-spacing: -.015em;
+  padding-right: 36px;
+}
+
+.modal__text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.modal .form {
+  border: 0;
+  padding: 0;
+  margin-top: 26px;
+  gap: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal__box { animation: none; }
+}
+
 /* ---------- Лайтбокс ---------- */
 
 .lightbox {
@@ -1062,17 +1251,21 @@ a.messenger:hover {
 
   .nav__messengers { display: flex; gap: 12px; }
 
-  .nav__messengers a {
+  .nav__messengers a,
+  .nav__messengers .messenger-btn {
     width: 48px;
     height: 48px;
     padding: 0; /* иначе отступ пунктов меню (.nav a) схлопывает иконку */
     display: grid;
     place-items: center;
     border: 1px solid var(--line);
+    background: transparent;
     color: var(--ink);
+    cursor: pointer;
   }
 
   .nav__messengers svg { width: 19px; height: 19px; fill: currentColor; }
+  .nav__messengers .messenger-btn svg { width: 19px; height: 19px; }
 
   /* hero складывается: фото сверху, текст снизу */
   .hero {

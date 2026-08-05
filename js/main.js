@@ -5,8 +5,18 @@
   var burger = document.getElementById("burger");
   var nav = document.getElementById("nav");
 
+  var fab = document.getElementById("fab");
+  var fabToggle = document.getElementById("fab-toggle");
+
+  function lockScroll(on) {
+    document.body.style.overflow = on ? "hidden" : "";
+    document.body.classList.toggle("is-locked", on);
+  }
+
   function onScroll() {
     header.classList.toggle("is-scrolled", window.scrollY > 24);
+    // кнопка связи появляется, когда первый экран пролистан
+    if (fab) fab.classList.toggle("is-visible", window.scrollY > 400);
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
@@ -16,14 +26,14 @@
       var open = header.classList.toggle("is-menu-open");
       burger.classList.toggle("is-open", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
-      document.body.style.overflow = open ? "hidden" : "";
+      lockScroll(open);
     });
     nav.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
+      if (e.target.closest("a")) {
         header.classList.remove("is-menu-open");
         burger.classList.remove("is-open");
         burger.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
+        lockScroll(false);
       }
     });
 
@@ -72,22 +82,87 @@
     });
   }
 
-  var form = document.getElementById("lead-form");
-  if (form) {
+  // Отправка заявки: серверной части нет — открываем WhatsApp с готовым текстом
+  function wireLeadForm(form) {
+    if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      var name = form.elements.name.value.trim();
-      var phone = form.elements.phone.value.trim();
-      var message = form.elements.message.value.trim();
+      var msgField = form.elements.message;
+      var message = msgField ? msgField.value.trim() : "";
       var text =
         "Заявка с сайта voidaform.ru\n" +
-        "Имя: " + name + "\n" +
-        "Телефон: " + phone +
+        "Имя: " + form.elements.name.value.trim() + "\n" +
+        "Телефон: " + form.elements.phone.value.trim() +
         (message ? "\nО проекте: " + message : "");
       window.open("https://wa.me/79677711120?text=" + encodeURIComponent(text), "_blank", "noopener");
       form.classList.add("is-done");
       form.querySelector("button[type=submit]").disabled = true;
+    });
+  }
+
+  wireLeadForm(document.getElementById("lead-form"));
+  wireLeadForm(document.getElementById("callback-form"));
+
+  // --- Плавающая кнопка связи (смартфоны) ---
+  if (fab && fabToggle) {
+    fabToggle.addEventListener("click", function () {
+      var open = fab.classList.toggle("is-open");
+      fabToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    document.addEventListener("click", function (e) {
+      if (fab.classList.contains("is-open") && !fab.contains(e.target)) closeFab();
+    });
+
+    fab.addEventListener("click", function (e) {
+      if (e.target.closest(".fab__item")) closeFab();
+    });
+  }
+
+  function closeFab() {
+    if (!fab) return;
+    fab.classList.remove("is-open");
+    fabToggle.setAttribute("aria-expanded", "false");
+  }
+
+  // --- Модальное окно с формой ---
+  var modal = document.getElementById("callback-modal");
+  if (modal) {
+    var lastFocused = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      closeFab();
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      lockScroll(true);
+      var first = modal.querySelector("input[type=text], input[type=tel], input");
+      if (first) first.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      lockScroll(false);
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-modal-open]")) { e.preventDefault(); openModal(); }
+      else if (e.target.closest("[data-modal-close]")) closeModal();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!modal.classList.contains("is-open")) return;
+      if (e.key === "Escape") { closeModal(); return; }
+      if (e.key !== "Tab") return;
+      // не выпускаем фокус за пределы окна, пока оно открыто
+      var items = modal.querySelectorAll("a[href], button, input, textarea");
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   }
 })();
