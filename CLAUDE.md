@@ -54,7 +54,16 @@
 - SEO уже разложено: JSON-LD (ProfessionalService, FAQPage, BreadcrumbList), OG-теги,
   canonical на https://voidaform.ru. При смене домена — менять и в
   `scripts/build_projects.py` (константа SITE), и в index/sitemap/robots.
-- Форма заявки серверной части не имеет: submit открывает WhatsApp с текстом заявки.
+- **Заявки уходят в Telegram** через `api/lead.php` (PHP на Beget есть — там
+  жил старый WordPress). Токен бота и id чата лежат в `api/config.php`,
+  который **не хранится в репозитории**: его собирает GitHub Actions из
+  секретов `TG_BOT_TOKEN` / `TG_CHAT_ID`. Бот — `@voidaform_bot`.
+  Если обработчик недоступен или не настроен, `js/main.js` открывает WhatsApp
+  с текстом заявки — запасной путь, заявка не теряется.
+  Адрес обработчика у каждой формы свой (`data-endpoint`), потому что пути
+  относительные: `api/lead.php`, `../api/lead.php`, `/api/lead.php` на 404.
+  Защита: скрытое поле-ловушка `.form__trap`, проверка телефона на 6 цифр,
+  лимит 5 заявок с IP за 10 минут (файл во временной папке).
   Форм две — в секции контактов (`#lead-form`) и в модалке (`#callback-form`),
   обе обслуживает `wireLeadForm()` в `js/main.js`. У обеих есть скрытое поле
   `source` — оно уходит в текст заявки строкой «Откуда: …».

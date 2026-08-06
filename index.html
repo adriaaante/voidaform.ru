@@ -448,7 +448,8 @@
             <p>Москва и Московская область</p>
           </div>
         </div>
-        <form class="form reveal" id="lead-form" novalidate>
+        <form class="form reveal" id="lead-form" novalidate data-endpoint="api/lead.php">
+          <input class="form__trap" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
           <input type="hidden" name="source" value="Форма в разделе «Контакты»">
           <div class="form__field">
             <label for="f-name">Имя</label>
@@ -540,7 +541,8 @@
       <button class="modal__close" type="button" data-modal-close aria-label="Закрыть окно"></button>
       <h2 class="modal__title" id="callback-title">Оставить заявку</h2>
       <p class="modal__text">Оставьте имя и телефон — перезвоним в течение рабочего дня и бесплатно посчитаем смету.</p>
-      <form class="form" id="callback-form" novalidate>
+      <form class="form" id="callback-form" novalidate data-endpoint="api/lead.php">
+        <input class="form__trap" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="source" value="Оставить заявку">
         <div class="form__field">
           <label for="cb-name">Имя</label>

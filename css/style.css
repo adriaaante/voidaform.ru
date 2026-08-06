@@ -776,6 +776,18 @@ a.messenger:hover {
 
 .form__consent a { text-decoration: underline; text-underline-offset: 2px; }
 
+/* ловушка для спам-ботов: человек поля не видит, автозаполнялка — да */
+.form__trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .form__done {
   display: none;
   padding: 16px 18px;

@@ -83,12 +83,18 @@
     });
   }
 
-  // Отправка заявки: серверной части нет — открываем WhatsApp с готовым текстом
+  // Отправка заявки: уходит на api/lead.php, оттуда — в Telegram.
+  // Если обработчик недоступен (нет PHP, сеть отвалилась) — открываем
+  // WhatsApp с готовым текстом, чтобы заявка не потерялась.
   function wireLeadForm(form) {
     if (!form) return;
+    var submit = form.querySelector("button[type=submit]");
+    var submitLabel = submit ? submit.textContent : "";
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
+
       var msgField = form.elements.message;
       var message = msgField ? msgField.value.trim() : "";
       var srcField = form.elements.source;
@@ -99,9 +105,31 @@
         "Телефон: " + form.elements.phone.value.trim() +
         (message ? "\nО проекте: " + message : "") +
         (source ? "\nОткуда: " + source : "");
-      window.open("https://wa.me/79677711120?text=" + encodeURIComponent(text), "_blank", "noopener");
-      form.classList.add("is-done");
-      form.querySelector("button[type=submit]").disabled = true;
+
+      function done() {
+        form.classList.add("is-done");
+        if (submit) { submit.disabled = true; submit.textContent = submitLabel; }
+      }
+
+      function fallbackToWhatsApp() {
+        window.open("https://wa.me/79677711120?text=" + encodeURIComponent(text), "_blank", "noopener");
+        done();
+      }
+
+      var endpoint = form.getAttribute("data-endpoint");
+      if (!endpoint || !window.fetch || !window.FormData) { fallbackToWhatsApp(); return; }
+
+      var data = new FormData(form);
+      data.append("page", location.pathname);
+      if (submit) { submit.disabled = true; submit.textContent = "Отправляем…"; }
+
+      fetch(endpoint, { method: "POST", body: data })
+        .then(function (r) { return r.json().catch(function () { return null; }); })
+        .then(function (json) {
+          if (json && json.ok) done();
+          else fallbackToWhatsApp();
+        })
+        .catch(fallbackToWhatsApp);
     });
   }
 
