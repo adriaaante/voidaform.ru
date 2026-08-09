@@ -867,13 +867,35 @@ a.messenger:hover {
   color: #fff;
 }
 
+/* реквизиты юрлица — требование закона о защите прав потребителей */
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* разделитель уже даёт border-bottom у .footer__top — своей линии не нужно */
+  margin-top: clamp(20px, 2.6vw, 30px);
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .45);
+}
+
+.footer__legal a {
+  display: inline-block;
+  padding: 10px 0;
+  margin: -10px 0; /* зона нажатия ≥32px без раздувания вёрстки */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .3s;
+}
+.footer__legal a:hover { color: #fff; }
+
 .footer__bottom {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding-top: clamp(24px, 3vw, 34px);
+  padding-top: clamp(14px, 1.8vw, 20px);
   font-size: 12px;
 }
 
@@ -991,6 +1013,10 @@ a.messenger:hover {
 .text-page__body { margin-top: clamp(26px, 3vw, 40px); display: flex; flex-direction: column; gap: 18px; }
 .text-page__body p { color: var(--ink-soft); font-size: 15px; }
 .text-page__body a { text-decoration: underline; text-underline-offset: 3px; }
+.text-page__body h2 { margin-top: 22px; font-size: 19px; font-weight: 500; letter-spacing: -.01em; }
+.text-page__body ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+.text-page__body li { color: var(--ink-soft); font-size: 15px; }
+.text-page__note { margin-top: 8px; padding: 16px 18px; background: var(--bg-soft); font-size: 13.5px; color: var(--muted); }
 
 /* ---------- Плавающая кнопка связи (только смартфоны) ---------- */
 

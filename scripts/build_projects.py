@@ -273,6 +273,10 @@ TEMPLATE = """<!DOCTYPE html>
           </div>
         </div>
       </div>
+      <div class="footer__legal">
+        <span>ООО «ГПУ 3» · ИНН 9701313061 · ОГРН 1257700252512 · 101000, г. Москва, Архангельский пер., д. 11/16, стр. 1, помещ. 4п</span>
+        <span><a href="../privacy.html">Политика обработки персональных данных</a> · <a href="../consent.html">Согласие на обработку</a></span>
+      </div>
       <div class="footer__bottom">
       <span>© 2026 Void &amp; Form · Авторское дизайн-бюро</span>
       <a href="https://futureflow.ru" target="_blank" rel="noopener" aria-label="Сделано в FutureFlow"
@@ -320,8 +324,8 @@ TEMPLATE = """<!DOCTYPE html>
           <input id="cb-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+7 (___) ___-__-__">
         </div>
         <label class="form__consent">
-          <input type="checkbox" required checked>
-          <span>Отправляя форму, вы соглашаетесь с <a href="../privacy.html">политикой обработки персональных данных</a></span>
+          <input type="checkbox" required>
+          <span>Даю <a href="../consent.html">согласие</a> на обработку персональных данных в соответствии с <a href="../privacy.html">политикой</a></span>
         </label>
         <button class="btn" type="submit">Отправить заявку</button>
         <p class="form__done">Спасибо! Мы свяжемся с вами в ближайшее время.</p>

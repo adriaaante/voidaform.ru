@@ -15,6 +15,7 @@ const PAGES = [
   ['/projects/akvarel.html', 'Проект Акварель'],
   ['/projects/glubina.html', 'Проект Глубина'],
   ['/privacy.html', 'Политика'],
+  ['/consent.html', 'Согласие'],
 ];
 
 const DEVICES = [
