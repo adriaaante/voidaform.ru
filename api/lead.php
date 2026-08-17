@@ -9,6 +9,24 @@
 
 declare(strict_types=1);
 
+// Обработчик общий для двух сайтов: voidaform.ru и подноль.рф (заявки идут
+// в один Telegram-чат). Чужим доменам браузер ответ не отдаст.
+$allowedOrigins = [
+    'https://voidaform.ru',
+    'https://xn--d1aofccc0h.xn--p1ai',      // подноль.рф
+    'https://adriaaante.github.io',          // стейджинг подноль.рф на GitHub Pages
+];
+$origin = (string)($_SERVER['HTTP_ORIGIN'] ?? '');
+if (in_array($origin, $allowedOrigins, true)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+    header('Vary: Origin');
+}
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    header('Access-Control-Allow-Methods: POST');
+    http_response_code(204);
+    exit;
+}
+
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
@@ -54,6 +72,10 @@ $phone   = $clean((string)($_POST['phone'] ?? ''), 40);
 $message = $clean((string)($_POST['message'] ?? ''), 700);
 $source  = $clean((string)($_POST['source'] ?? ''), 140);
 $page    = $clean((string)($_POST['page'] ?? ''), 200);
+$site    = $clean((string)($_POST['site'] ?? ''), 60);
+if ($site === '') {
+    $site = 'voidaform.ru';
+}
 
 if ($name === '' || $phone === '') {
     reply(false, 'empty_fields', 422);
@@ -78,7 +100,7 @@ if ($ip !== '') {
     @file_put_contents($limitFile, implode(',', $hits), LOCK_EX);
 }
 
-$text = "Заявка с сайта voidaform.ru\n\n"
+$text = "Заявка с сайта {$site}\n\n"
     . "Имя: {$name}\n"
     . "Телефон: {$phone}\n"
     . ($message !== '' ? "О проекте: {$message}\n" : '')

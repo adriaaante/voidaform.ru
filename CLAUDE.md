@@ -62,6 +62,10 @@
 - SEO уже разложено: JSON-LD (ProfessionalService, FAQPage, BreadcrumbList), OG-теги,
   canonical на https://voidaform.ru. При смене домена — менять и в
   `scripts/build_projects.py` (константа SITE), и в index/sitemap/robots.
+- **`api/lead.php` обслуживает ДВА сайта**: этот и подноль.рф (репо
+  `adriaaante/demontazhnye_raboty`) — у него CORS-allowlist (punycode
+  подноль.рф + adriaaante.github.io) и поле `site` в тексте заявки.
+  Ломать/переносить обработчик — только с оглядкой на второй сайт.
 - **Заявки уходят в Telegram** через `api/lead.php` (PHP на Beget есть — там
   жил старый WordPress). Токен бота и id чата лежат в `api/config.php`,
   который **не хранится в репозитории**: его собирает GitHub Actions из
