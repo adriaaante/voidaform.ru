@@ -333,7 +333,7 @@ TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 
-  <script src="../js/main.js" defer></script>
+  <script src="../js/main.js?v=2" defer></script>
 </body>
 </html>
 """
