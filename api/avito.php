@@ -17,9 +17,13 @@
  *   • системные сообщения (автоответы «Ассистента Авито») пропускаем: это шум.
  *
  * Чтобы отличить наше объявление от чужого и подставить имя клиента, нужен
- * токен Авито — client_id/secret лежат в api/config.php (собирается при
- * выкладке из секретов GitHub). Без них мост отвечает Авито «ок», но ничего
- * не пересылает: лучше тишина, чем поток чужой переписки в рабочий чат.
+ * токен Авито. Ключи берутся из двух мест, в таком порядке:
+ *   1. api/config.php — поля avito_client_id / avito_client_secret, файл
+ *      собирается при выкладке из секретов репозитория;
+ *   2. api/avito-config.php — файл, положенный на хостинг руками. Выкладка его
+ *      не трогает (в репозитории его нет), так что он переживает обновления.
+ * Без ключей мост отвечает Авито «ок», но ничего не пересылает: лучше тишина,
+ * чем поток чужой переписки в рабочий чат.
  */
 
 declare(strict_types=1);
@@ -41,6 +45,15 @@ if (!is_array($config) || empty($config['token']) || empty($config['chat_id'])) 
     http_response_code(500);
     echo json_encode(['ok' => false, 'error' => 'not_configured']);
     exit;
+}
+
+// Ключи Авито: из общего конфига или из файла, положенного на хостинг руками.
+$localFile = __DIR__ . '/avito-config.php';
+if (empty($config['avito_client_id']) && is_readable($localFile)) {
+    $local = require $localFile;
+    if (is_array($local)) {
+        $config += $local;
+    }
 }
 
 $hookKey = substr(hash('sha256', 'avito-webhook|' . $config['token']), 0, 32);
