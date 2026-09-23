@@ -23,6 +23,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . '/tg.php';
+
 // Обработчик общий для двух сайтов: voidaform.ru и подноль.рф (заявки идут
 // в один Telegram-чат). Чужим доменам браузер ответ не отдаст.
 $allowedOrigins = [
@@ -241,40 +243,9 @@ $text = "Заявка с сайта {$site}\n\n"
     . ($message !== '' ? "О проекте: {$message}\n" : '')
     . ($source !== '' ? "Откуда: {$source}\n" : '')
     . ($page !== '' ? "Страница: {$page}\n" : '')
-    . 'Время: ' . date('d.m.Y H:i');
+    . 'Время: ' . (new DateTimeImmutable('now', new DateTimeZone('Europe/Moscow')))->format('d.m.Y H:i');
 
-$payload = http_build_query([
-    'chat_id' => $config['chat_id'],
-    'text' => $text,
-    'disable_web_page_preview' => 'true',
-]);
-$url = 'https://api.telegram.org/bot' . $config['token'] . '/sendMessage';
-
-$response = false;
-if (function_exists('curl_init')) {
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => $payload,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 10,
-    ]);
-    $response = curl_exec($ch);
-    curl_close($ch);
-} else {
-    $response = @file_get_contents($url, false, stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
-            'content' => $payload,
-            'timeout' => 10,
-            'ignore_errors' => true,
-        ],
-    ]));
-}
-
-$result = is_string($response) ? json_decode($response, true) : null;
-if (!is_array($result) || empty($result['ok'])) {
+if (!tg_send((string)$config['token'], (string)$config['chat_id'], $text)) {
     // не получилось — фронт откроет WhatsApp как запасной путь
     reply(false, 'telegram_error', 502);
 }
