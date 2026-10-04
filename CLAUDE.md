@@ -145,6 +145,15 @@
   Ожидаемый результат — «✓ проблем не найдено».
 
 ## Деплой
+- **Доступы в облачной сессии** (переменные окружения claude.ai/code, значения
+  только там, в репо — никогда): `BEGET_ARSENIY_LOGIN` / `BEGET_ARSENIY_API_PASSWORD`
+  — API Beget (`api.beget.com`, весь аккаунт dudareid: сайты, домены, DNS, FTP,
+  почта, MySQL, cron, бэкапы; файлов API не читает); `VOIDAFORM_TG_BOT_TOKEN` /
+  `VOIDAFORM_TG_CHAT_ID` — `@voidaform_bot` и группа «Void&Form», куда падают
+  заявки обоих сайтов и сообщения Авито; `PODNOL_AVITO_CLIENT_ID` /
+  `PODNOL_AVITO_CLIENT_SECRET` — API Авито «Под Ноль» (аккаунт 429115960).
+  Из контейнера наружу только HTTPS: FTP (21) и SSH (22) закрыты, выкладка — только
+  через GitHub Actions. Проверено 04.10.2026.
 - Хостинг — **Beget** (аккаунт `dudareid`, сервер `ssl.dream.beget.com`),
   там же DNS и почта домена. Папка сайта: `dudareid.beget.tech/public_html/` (домен привязан к техдомену).
 - Выкладка автоматическая: push в `main` → GitHub Actions
