@@ -75,11 +75,11 @@
 - **Оповещения владельцу** (`tg_alert` в `api/tg.php`): заявка не дошла до группы —
   она сама уходит в личку Adrian от `@voidaform_bot`; GitHub пишет туда же, если
   упала выкладка или `health.yml` (раз в 3 часа, `scripts/check_live.sh`) нашёл сбой.
-  Секрет `TG_OWNER_CHAT_ID`; без него оповещения молчат.
+  Секрет `FUTUREFLOW_OWNER_CHAT_ID`; без него оповещения молчат.
 - **Заявки уходят в Telegram** через `api/lead.php` (PHP на Beget есть — там
   жил старый WordPress). Токен бота и id чата лежат в `api/config.php`,
   который **не хранится в репозитории**: его собирает GitHub Actions из
-  секретов `TG_BOT_TOKEN` / `TG_CHAT_ID`. Бот — `@voidaform_bot`.
+  секретов `VOIDAFORM_TG_BOT_TOKEN` / `VOIDAFORM_TG_CHAT_ID`. Бот — `@voidaform_bot`.
   Если обработчик недоступен или не настроен, `js/main.js` открывает WhatsApp
   с текстом заявки — запасной путь, заявка не теряется.
   Адрес обработчика у каждой формы свой (`data-endpoint`), потому что пути
@@ -150,6 +150,9 @@
   Ожидаемый результат — «✓ проблем не найдено».
 
 ## Деплой
+- **Секреты GitHub — с префиксом проекта** (`VOIDAFORM_FTP_*`, `VOIDAFORM_TG_*`; личка владельца —
+  `FUTUREFLOW_OWNER_CHAT_ID`, как в окружении сессии), решение Adrian 11.10.2026. Старые имена
+  без префикса удалены — воркфлоу их не читают.
 - **Доступы в облачной сессии** (переменные окружения claude.ai/code, значения
   только там, в репо — никогда): `BEGET_ARSENIY_LOGIN` / `BEGET_ARSENIY_API_PASSWORD`
   — API Beget (`api.beget.com`, весь аккаунт dudareid: сайты, домены, DNS, FTP,
@@ -164,9 +167,9 @@
   там же DNS и почта домена. Папка сайта: `dudareid.beget.tech/public_html/` (домен привязан к техдомену).
 - Выкладка автоматическая: push в `main` → GitHub Actions
   (`.github/workflows/deploy.yml`) заливает файлы по FTP.
-  Доступы в секретах репозитория: `FTP_SERVER`=dudareid.beget.tech,
-  `FTP_USERNAME`=dudareid_deploy (привязан к папке сайта), `FTP_DIR`=`/`,
-  `FTP_PASSWORD`. Подробности и разбор ошибок — в `DEPLOY.md`.
+  Доступы в секретах репозитория: `VOIDAFORM_FTP_SERVER`=dudareid.beget.tech,
+  `VOIDAFORM_FTP_USERNAME`=dudareid_deploy (привязан к папке сайта), `VOIDAFORM_FTP_DIR`=`/`,
+  `VOIDAFORM_FTP_PASSWORD`. Подробности и разбор ошибок — в `DEPLOY.md`.
 - На хостинг едут только файлы сайта; `scripts/`, `.github/`, `CLAUDE.md`
   и `DEPLOY.md` исключены в секции `exclude` воркфлоу.
 - `.htaccess` — https и без www, 301 со старых адресов WordPress
