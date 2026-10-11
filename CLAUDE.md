@@ -67,10 +67,15 @@
 - SEO уже разложено: JSON-LD (ProfessionalService, FAQPage, BreadcrumbList), OG-теги,
   canonical на https://voidaform.ru. При смене домена — менять и в
   `scripts/build_projects.py` (константа SITE), и в index/sitemap/robots.
-- **`api/lead.php` обслуживает ДВА сайта**: этот и подноль.рф (репо
-  `adriaaante/demontazhnye_raboty`) — у него CORS-allowlist (punycode
-  подноль.рф + adriaaante.github.io) и поле `site` в тексте заявки.
-  Ломать/переносить обработчик — только с оглядкой на второй сайт.
+- **`api/lead.php` и `api/tg.php` — один и тот же файл** здесь и в репо подноль.рф
+  (`adriaaante/demontazhnye_raboty`): у каждого сайта свой бот и свой `config.php`
+  (домены CORS `origins`, подпись `site`, `owner_chat_id`), группа в Telegram общая.
+  Правишь файл — копируй во второй репо. С 11.10.2026 подноль.рф шлёт заявки себе;
+  его домен оставлен в `origins` здесь для вкладок, открытых до переезда (убрать с 11.2026).
+- **Оповещения владельцу** (`tg_alert` в `api/tg.php`): заявка не дошла до группы —
+  она сама уходит в личку Adrian от `@voidaform_bot`; GitHub пишет туда же, если
+  упала выкладка или `health.yml` (раз в 3 часа, `scripts/check_live.sh`) нашёл сбой.
+  Секрет `TG_OWNER_CHAT_ID`; без него оповещения молчат.
 - **Заявки уходят в Telegram** через `api/lead.php` (PHP на Beget есть — там
   жил старый WordPress). Токен бота и id чата лежат в `api/config.php`,
   который **не хранится в репозитории**: его собирает GitHub Actions из
@@ -149,8 +154,9 @@
   только там, в репо — никогда): `BEGET_ARSENIY_LOGIN` / `BEGET_ARSENIY_API_PASSWORD`
   — API Beget (`api.beget.com`, весь аккаунт dudareid: сайты, домены, DNS, FTP,
   почта, MySQL, cron, бэкапы; файлов API не читает); `VOIDAFORM_TG_BOT_TOKEN` /
-  `VOIDAFORM_TG_CHAT_ID` — `@voidaform_bot` и группа «Void&Form», куда падают
-  заявки обоих сайтов и сообщения Авито; `PODNOL_AVITO_CLIENT_ID` /
+  `VOIDAFORM_TG_CHAT_ID` — `@voidaform_bot` и группа «Void&Form» (общая для
+  обоих сайтов); `PODNOL_TG_BOT_TOKEN` — бот «Под Ноль»; `FUTUREFLOW_OWNER_CHAT_ID`
+  — личка владельца для оповещений; `PODNOL_AVITO_CLIENT_ID` /
   `PODNOL_AVITO_CLIENT_SECRET` — API Авито «Под Ноль» (аккаунт 429115960).
   Из контейнера наружу только HTTPS: FTP (21) и SSH (22) закрыты, выкладка — только
   через GitHub Actions. Проверено 04.10.2026.

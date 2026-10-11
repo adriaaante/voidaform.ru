@@ -25,13 +25,16 @@ declare(strict_types=1);
 
 require __DIR__ . '/tg.php';
 
-// Обработчик общий для двух сайтов: voidaform.ru и подноль.рф (заявки идут
-// в один Telegram-чат). Чужим доменам браузер ответ не отдаст.
-$allowedOrigins = [
-    'https://voidaform.ru',
-    'https://xn--d1aofccc0h.xn--p1ai',      // подноль.рф
-    'https://adriaaante.github.io',          // стейджинг подноль.рф на GitHub Pages
-];
+$configFile = __DIR__ . '/config.php';
+$config = is_readable($configFile) ? require $configFile : null;
+
+// Файл одинаковый у voidaform.ru и подноль.рф: у каждого сайта свой бот и
+// свой конфиг. Чьи страницы принимаем и как подписать заявку — тоже из
+// конфига (его собирает выкладка); без этих полей — настройки voidaform.ru.
+// Чужим доменам браузер ответ не отдаст.
+$allowedOrigins = is_array($config) && !empty($config['origins'])
+    ? (array)$config['origins']
+    : ['https://voidaform.ru'];
 $origin = (string)($_SERVER['HTTP_ORIGIN'] ?? '');
 if (in_array($origin, $allowedOrigins, true)) {
     header('Access-Control-Allow-Origin: ' . $origin);
@@ -62,8 +65,6 @@ if ($method !== 'POST' && !($method === 'GET' && isset($_GET['token']))) {
     reply(false, 'method_not_allowed', 405);
 }
 
-$configFile = __DIR__ . '/config.php';
-$config = is_readable($configFile) ? require $configFile : null;
 if (!is_array($config) || empty($config['token']) || empty($config['chat_id'])) {
     reply(false, 'not_configured', 500);
 }
@@ -189,7 +190,7 @@ $source  = $clean((string)($_POST['source'] ?? ''), 140);
 $page    = $clean((string)($_POST['page'] ?? ''), 200);
 $site    = $clean((string)($_POST['site'] ?? ''), 60);
 if ($site === '') {
-    $site = 'voidaform.ru';
+    $site = (string)($config['site'] ?? 'voidaform.ru');
 }
 
 if ($name === '' || $phone === '') {
@@ -246,7 +247,10 @@ $text = "Заявка с сайта {$site}\n\n"
     . 'Время: ' . (new DateTimeImmutable('now', new DateTimeZone('Europe/Moscow')))->format('d.m.Y H:i');
 
 if (!tg_send((string)$config['token'], (string)$config['chat_id'], $text)) {
-    // не получилось — фронт откроет WhatsApp как запасной путь
+    // Группа не приняла (бота убрали из чата, чат пересоздали…). Заявку
+    // целиком — владельцу в личку, чтобы не потерялась; фронт тем временем
+    // откроет человеку WhatsApp как запасной путь.
+    tg_alert($config, 'lead', "заявка не дошла до группы, вот она:\n\n" . $text, false);
     reply(false, 'telegram_error', 502);
 }
 
