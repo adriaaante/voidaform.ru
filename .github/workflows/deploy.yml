@@ -69,7 +69,7 @@ jobs:
         continue-on-error: true
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp -u "${{ secrets.VOIDAFORM_FTP_USERNAME }},${{ secrets.VOIDAFORM_FTP_PASSWORD }}" "${{ secrets.VOIDAFORM_FTP_SERVER }}" <<'LFTP'
+          lftp -u "${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" <<'LFTP'
           set cmd:fail-exit no
           set ftp:passive-mode on
           set ssl:verify-certificate no
@@ -102,10 +102,10 @@ jobs:
       - name: Залить на хостинг по FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.VOIDAFORM_FTP_SERVER }}
-          username: ${{ secrets.VOIDAFORM_FTP_USERNAME }}
-          password: ${{ secrets.VOIDAFORM_FTP_PASSWORD }}
-          server-dir: ${{ secrets.VOIDAFORM_FTP_DIR }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_DIR }}
           protocol: ftp
           # в репозитории лежат и служебные файлы — на хостинг они не нужны
           exclude: |

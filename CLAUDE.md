@@ -150,9 +150,9 @@
   Ожидаемый результат — «✓ проблем не найдено».
 
 ## Деплой
-- **Секреты GitHub — с префиксом проекта** (`VOIDAFORM_FTP_*`, `VOIDAFORM_TG_*`; личка владельца —
-  `FUTUREFLOW_OWNER_CHAT_ID`, как в окружении сессии), решение Adrian 11.10.2026. Старые имена
-  без префикса удалены — воркфлоу их не читают.
+- **Секреты бота в GitHub — с префиксом проекта**: `VOIDAFORM_TG_BOT_TOKEN`, `VOIDAFORM_TG_CHAT_ID`, личка
+  владельца — `FUTUREFLOW_OWNER_CHAT_ID` (как в окружении сессии); решение Adrian 11.10.2026.
+  Остальные секреты (FTP_*) — прежние имена без префикса.
 - **Доступы в облачной сессии** (переменные окружения claude.ai/code, значения
   только там, в репо — никогда): `BEGET_ARSENIY_LOGIN` / `BEGET_ARSENIY_API_PASSWORD`
   — API Beget (`api.beget.com`, весь аккаунт dudareid: сайты, домены, DNS, FTP,
@@ -167,9 +167,9 @@
   там же DNS и почта домена. Папка сайта: `dudareid.beget.tech/public_html/` (домен привязан к техдомену).
 - Выкладка автоматическая: push в `main` → GitHub Actions
   (`.github/workflows/deploy.yml`) заливает файлы по FTP.
-  Доступы в секретах репозитория: `VOIDAFORM_FTP_SERVER`=dudareid.beget.tech,
-  `VOIDAFORM_FTP_USERNAME`=dudareid_deploy (привязан к папке сайта), `VOIDAFORM_FTP_DIR`=`/`,
-  `VOIDAFORM_FTP_PASSWORD`. Подробности и разбор ошибок — в `DEPLOY.md`.
+  Доступы в секретах репозитория: `FTP_SERVER`=dudareid.beget.tech,
+  `FTP_USERNAME`=dudareid_deploy (привязан к папке сайта), `FTP_DIR`=`/`,
+  `FTP_PASSWORD`. Подробности и разбор ошибок — в `DEPLOY.md`.
 - На хостинг едут только файлы сайта; `scripts/`, `.github/`, `CLAUDE.md`
   и `DEPLOY.md` исключены в секции `exclude` воркфлоу.
 - `.htaccess` — https и без www, 301 со старых адресов WordPress
