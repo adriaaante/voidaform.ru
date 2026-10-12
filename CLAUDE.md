@@ -69,7 +69,8 @@
   `scripts/build_projects.py` (константа SITE), и в index/sitemap/robots.
 - **`api/lead.php` и `api/tg.php` — один и тот же файл** здесь и в репо подноль.рф
   (`adriaaante/demontazhnye_raboty`): у каждого сайта свой бот и свой `config.php`
-  (домены CORS `origins`, подпись `site`, `owner_chat_id`), группа в Telegram общая.
+  (домены CORS `origins`, подпись `site`, `owner_chat_id`). Группы в Telegram с 12.10.2026
+  раздельные: Void — `-5568077474`, Под Ноль — `-5522407239` (бывшая общая «Void&Form»).
   Правишь файл — копируй во второй репо. С 11.10.2026 подноль.рф шлёт заявки себе;
   его домен оставлен в `origins` здесь для вкладок, открытых до переезда (убрать с 11.2026).
 - **Оповещения владельцу** (`tg_alert` в `api/tg.php`): заявка не дошла до группы —
@@ -157,8 +158,8 @@
   только там, в репо — никогда): `BEGET_ARSENIY_LOGIN` / `BEGET_ARSENIY_API_PASSWORD`
   — API Beget (`api.beget.com`, весь аккаунт dudareid: сайты, домены, DNS, FTP,
   почта, MySQL, cron, бэкапы; файлов API не читает); `VOIDAFORM_TG_BOT_TOKEN` /
-  `VOIDAFORM_TG_CHAT_ID` — `@voidaform_bot` и группа «Void&Form» (общая для
-  обоих сайтов); `PODNOL_TG_BOT_TOKEN` — бот «Под Ноль»; `FUTUREFLOW_OWNER_CHAT_ID`
+  `VOIDAFORM_TG_CHAT_ID` — `@voidaform_bot` и группа Void (`-5568077474`, только
+  этот сайт); `PODNOL_TG_BOT_TOKEN` — бот «Под Ноль»; `FUTUREFLOW_OWNER_CHAT_ID`
   — личка владельца для оповещений; `PODNOL_AVITO_CLIENT_ID` /
   `PODNOL_AVITO_CLIENT_SECRET` — API Авито «Под Ноль» (аккаунт 429115960).
   Из контейнера наружу только HTTPS: FTP (21) и SSH (22) закрыты, выкладка — только
