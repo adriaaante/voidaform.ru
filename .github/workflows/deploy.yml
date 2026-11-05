@@ -2,9 +2,9 @@ name: Deploy to Beget
 
 # Сайт выкладывается автоматически при каждом пуше в main.
 # Кнопка «Run workflow» на вкладке Actions запускает выкладку вручную.
+# 05.11.2026: сайт переехал на сервер Timeweb (45.93.201.72), он сам забирает код с GitHub раз в 5 минут
+# (ops/pull-deploy.php в репо подноль.рф). FTP-выкладка на Beget осталась только ручной — на случай отката.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
